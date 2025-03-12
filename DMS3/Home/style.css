@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
+button {
+    margin: 0 auto;
+    color: #fda1ca;
+    background-color: transparent;
+    font-size: 20px;
+    border: 0px solid #ffffff;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    color: #fe7db7;
+    background-color: transparent;
+  }
+
 h1 {
   text-align: center;
   font-family: "DotGothic16", sans-serif !important;
@@ -11,16 +25,12 @@ h1 {
   color: #474545;
 }
 
-button {
-    color: #ffffff;
-    background-color: #8dc3b6;
-    font-size: 19px;
-    border: 0px solid #ffffff;
-    border-radius: 3px;
-    padding: 15px 30px;
-    letter-spacing: 4px;
-    cursor: pointer
-}
-button:hover {
+:root {
     background-color: #ffffff;
-}
+    background-image: url(https://i.pinimg.com/736x/ff/9f/ba/ff9fba947fd0f5aaddf649af1c496f07.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-size: 600% 100;
+  
+  
