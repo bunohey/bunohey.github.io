@@ -4,9 +4,9 @@
 }
 
 :root {
-  --col-01: #bfe8e0;
-  --col-02: #e0f8f1;
-  --col-03: #ffd9dd;
-  --col-04: #ffd9dd;
+  --col01: #bfe8e0;
+  --col02: #e0f8f1;
+  --col03: #ffd9dd;
+  --col04: #ffd9dd;
   --border: double 1rem var(--col04);
 }
