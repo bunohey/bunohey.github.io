@@ -13,7 +13,7 @@ h3, h4, p, div {
 }
 
 h1, h2, h3, h4, p, div {
-  text-align: center;
+  text-align: right;
 }
 
 :root {
@@ -21,10 +21,9 @@ h1, h2, h3, h4, p, div {
   --col02: #e0f8f1;
   --col03: #ffd9dd;
   --col04: #ffd9dd;
-  background-color: #f1fffd (0.2);
+  background-color: #dffff5;
   background-image: url(https://i.pinimg.com/736x/0f/48/68/0f4868ac7ae515b94095913185de9ab1.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed; 
   background-size: 100% 100;
-  text-align: center;
 }
