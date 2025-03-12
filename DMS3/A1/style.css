@@ -9,6 +9,7 @@ button {
   font-size: 20px;
   border: 0px solid #ffffff;
   cursor: pointer;
+  
 }
 
 button:hover {
@@ -75,11 +76,15 @@ h4 a:hover, p a:hover, div a:hover {
   color: #ee4848;
   text-decoration: underline;}
 
+/*-----------Background-----------*/
+body {
+  cursor: url('https://www.cursor.cc/cursor3d/44709.png') 16 16, auto;
+}
+
 :root {
   background-color: #ebfeff;
   background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100;
-  cursor: url('your-image-url.png'), auto;
 }
