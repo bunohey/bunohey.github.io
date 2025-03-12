@@ -10,6 +10,7 @@ h1, h2, h3, h4, p, div {
   --col02: #e0f8f1;
   --col03: #ffd9dd;
   --col04: #ffd9dd;
+  background-color: #d1e9e5;
 }
 
 body {
@@ -18,5 +19,4 @@ body {
   font-weight: 900;
   font-style: normal;
   font-variation-settings: "ROND" 0;
-  background-color: #d1e9e5;
 }
