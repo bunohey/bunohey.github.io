@@ -7,6 +7,6 @@ h1 {
   font-style: normal;
 
   letter-spacing: 10px; /* 글씨 간격 */
-  line-height: 2; /* 행 여백 */
-  color: #000000;
+  line-height: 2px; /* 행 여백 */
+  color: #474545;
 }
