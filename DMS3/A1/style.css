@@ -1,9 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@900&display=swap');
+
+
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+
+body {
+  font-family: "DotGothic16", sans-serif !important;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #d1e9e5;
+}
 
 h1, h2, h3, h4, p, div {
   text-align: center;
 }
-
 
 :root {
   --col01: #bdebe2;
@@ -12,3 +20,5 @@ h1, h2, h3, h4, p, div {
   --col04: #ffd9dd;
   background-color: #d1e9e5;
 }
+
+
