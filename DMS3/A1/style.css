@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
+/*-----------BUTTON-----------*/
+
+button {
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 20px;
+  border: 0px solid #1f0e0e;
+  cursor: pointer
+}
+button:hover {
+  color: #78b59d;
+  background-color: transparent;
+}
+
+/*---------PARAGRAPH---------*/
+
 h1 {
   text-align: right;
   font-family: "DotGothic16", sans-serif !important;
@@ -52,6 +68,11 @@ h4 a, p a, div a {
 
 h4 a:visited, p a:visited, div a:visited {
   color: #ee95bb;
+}
+
+h4 a:hover, p a:hover, div a:hover {
+  color: #ee4848;
+  text-decoration: underline;
 }
 
 :root {

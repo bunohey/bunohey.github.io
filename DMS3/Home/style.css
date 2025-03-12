@@ -10,3 +10,17 @@ h1 {
   line-height: 2px; /* 행 여백 */
   color: #474545;
 }
+
+button {
+    color: #ffffff;
+    background-color: #8dc3b6;
+    font-size: 19px;
+    border: 0px solid #ffffff;
+    border-radius: 3px;
+    padding: 15px 30px;
+    letter-spacing: 4px;
+    cursor: pointer
+}
+button:hover {
+    background-color: #ffffff;
+}
