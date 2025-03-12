@@ -11,3 +11,11 @@
   --col04: #ffd9dd;
   --border: double 1rem var(--col04);
 }
+
+body {
+  font-family: "Doto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 244;
+  font-style: normal;
+  font-variation-settings: "ROND" 0;
+}
