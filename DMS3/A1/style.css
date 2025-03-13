@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
-* {
-  cursor: url('https://www.cursor.cc/cursor3d/44709.png'), auto;
-}
-
 /*-----------BUTTON-----------*/
 
 button {
@@ -93,6 +89,13 @@ h4 a:hover, p a:hover, div a:hover {
   }
 
 /*-----------Background-----------*/
+
+.drag-text h1, .drag-text h2, .drag-text h3, .drag-text h4, .drag-text h5, .drag-text div, .drag-text p {
+  color: rgb(255, 255, 219);
+  background-color: rgb(114, 67, 174);
+}
+
+*{ cursor: url('cursor.cur'), auto; }
 
 :root {
   background-color: #ebfeff;
