@@ -1,8 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
-* {
-  cursor: url('https://www.cursor.cc/cursor3d/44709.png'), auto;
-}
-
 
 /*-----------BUTTON-----------*/
 
@@ -100,4 +96,8 @@ h4 a:hover, p a:hover, div a:hover {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100;
+}
+
+* {
+  cursor: url('https://www.cursor.cc/cursor3d/44709.png'), pointer;
 }
