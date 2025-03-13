@@ -35,5 +35,5 @@ h1 {
 }
   
 body {
-  cursor: url('cursor.cur'), auto;
+  cursor: url('your-cursor.png') 32 32, auto;
 }
