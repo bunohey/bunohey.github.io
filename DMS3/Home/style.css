@@ -34,3 +34,6 @@ h1 {
     background-size: 600% 100;
 }
   
+body {
+  cursor: url('cursor.cur'), auto;
+}
