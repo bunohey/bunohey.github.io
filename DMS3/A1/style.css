@@ -4,12 +4,13 @@
 
 button {
   margin: 0 auto;
-  color: #fda1ca;
+  color: #ffffff;
   background-color: transparent;
   font-size: 20px;
   border: 0px solid #ffffff;
   cursor: pointer;
-  
+  margin-left: 50px;
+  margin-top: 100px;>
 }
 
 button:hover {
@@ -99,5 +100,5 @@ h4 a:hover, p a:hover, div a:hover {
 }
 
 body {
-  cursor: url('cursor.cur'), auto;
+  cursor: url('your-cursor.png') 32 32, auto;
 }
