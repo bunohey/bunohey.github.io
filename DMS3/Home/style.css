@@ -2,7 +2,7 @@
 
 button {
     margin: 0 auto;
-    color: #ff878f;
+    color: #a2e4e0;
     background-color: transparent;
     font-size: 20px;
     border: 0px solid #ffffff;
@@ -10,7 +10,7 @@ button {
   }
   
   button:hover {
-    color: #fe7db7;
+    color: #78d6bd;
     background-color: transparent;
   }
 
@@ -41,13 +41,14 @@ h3 {
 
   letter-spacing: 4px; /* 글씨 간격 */
   line-height: -5; /* 행 여백 */
-  color: #41564e;
+  color: #ffc7f1;
 }
 
 
 :root {
   background-image: url("https://i.pinimg.com/474x/be/95/c8/be95c8eb8f4882f9e19163c96b10bc0c.jpg");
-  background-size: 20%;
+  background-size: 15%;
+  background-repeat: repeat;
 }
 
 
@@ -57,5 +58,11 @@ body {
   white-space: normal;
   text-align: center;
   cursor: url('your-cursor.png') 32 32, auto;
+}
 
+.box {
+  border: 2px solid #e6b1d5; /* 테두리 색상 */
+  padding: 10px; /* 내부 여백 */
+  display: inline-block; /* 크기를 내용에 맞춤 */
+  background-color: rgba(255, 255, 255, 0.2); /* 배경색 (투명도 조절 가능) */
 }
