@@ -100,7 +100,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-  text-align: right; /* 텍스트를 오른쪽 정렬 */
+  text-align: right;
   cursor: url('your-cursor.png') 32 32, auto;
   margin-left: auto;  /* 왼쪽 공간 확보 */
 

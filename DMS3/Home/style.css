@@ -15,7 +15,6 @@ button {
   }
 
 h1 {
-  text-align: center;
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 600;
   font-style: normal;
@@ -26,7 +25,6 @@ h1 {
 }
 
 h2 {
-  padding-right: 60px;
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 300;
   font-style: normal;
@@ -36,9 +34,20 @@ h2 {
   color: #4f816e;
 }
 
+h3 {
+  font-family: "DotGothic16", sans-serif !important;
+  font-weight: 1;
+  font-style: normal;
+
+  letter-spacing: 4px; /* 글씨 간격 */
+  line-height: -5; /* 행 여백 */
+  color: #41564e;
+}
+
+
 :root {
-  background-image: url(background.jpg);
-  background-size: 100%;
+  background-image: url("https://i.pinimg.com/474x/be/95/c8/be95c8eb8f4882f9e19163c96b10bc0c.jpg");
+  background-size: 20%;
 }
 
 
