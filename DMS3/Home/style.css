@@ -2,7 +2,7 @@
 
 button {
     margin: 0 auto;
-    color: #fda1ca;
+    color: #ff878f;
     background-color: transparent;
     font-size: 20px;
     border: 0px solid #ffffff;
@@ -17,23 +17,36 @@ button {
 h1 {
   text-align: center;
   font-family: "DotGothic16", sans-serif !important;
+  font-weight: 600;
+  font-style: normal;
+
+  letter-spacing: 26px; /* 글씨 간격 */
+  line-height: 10px; /* 행 여백 */
+  color: #000000;
+}
+
+h2 {
+  padding-right: 60px;
+  font-family: "DotGothic16", sans-serif !important;
   font-weight: 300;
   font-style: normal;
 
-  letter-spacing: 10px; /* 글씨 간격 */
-  line-height: 2px; /* 행 여백 */
-  color: #474545;
+  letter-spacing: 4px; /* 글씨 간격 */
+  line-height: -5; /* 행 여백 */
+  color: #4f816e;
 }
 
 :root {
-    background-color: #ffffff;
-    background-image: url(https://i.pinimg.com/736x/ff/9f/ba/ff9fba947fd0f5aaddf649af1c496f07.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-size: 600% 100;
+  background-image: url(background.jpg);
+  background-size: 100%;
 }
-  
+
+
 body {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
   cursor: url('your-cursor.png') 32 32, auto;
+
 }
