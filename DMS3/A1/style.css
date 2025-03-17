@@ -102,4 +102,5 @@ body {
   white-space: normal;
   text-align: right;
   margin-left: auto;
+  cursor: url('cursor.cur'), auto;
 }
