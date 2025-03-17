@@ -25,8 +25,8 @@ h1 {
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 1;
   font-style: normal;
-  letter-spacing: 65px; /* 글씨 간격 */
-  line-height: 2; /* 행 여백 */
+  letter-spacing: 65px;
+  line-height: 2;
   color: #272727;
 }
 
@@ -36,8 +36,8 @@ h2 {
   font-weight: 300;
   font-style: normal;
 
-  letter-spacing: 4px; /* 글씨 간격 */
-  line-height: -5; /* 행 여백 */
+  letter-spacing: 4px;
+  line-height: -5;
   color: #4f816e;
 }
 
@@ -47,8 +47,8 @@ h3 {
   font-weight: 400;
   font-style: normal;
 
-  letter-spacing: 0px; /* 글씨 간격 */
-  line-height: 3.5; /* 행 여백 */
+  letter-spacing: 0px;
+  line-height: 3.5;
   color: #b7b7b7
 }
 
@@ -58,8 +58,8 @@ h4 {
   font-weight: 1000;
   font-style: normal;
 
-  letter-spacing: 0px; /* 글씨 간격 */
-  line-height: 0; /* 행 여백 */
+  letter-spacing: 0px;
+  line-height: 0;
 }
 
 h4, h4 a, p a, div a {
@@ -80,8 +80,8 @@ h4 a:hover, p a:hover, div a:hover {
     font-weight: 400;
     font-style: normal;
   
-    letter-spacing: 0px; /* 글씨 간격 */
-    line-height: 2; /* 행 여백 */
+    letter-spacing: 0px;
+    line-height: 2;
     color: #393838;
   }
 
@@ -96,12 +96,11 @@ h4 a:hover, p a:hover, div a:hover {
 }
 
 body {
-  max-width: 89vw; /* ← 세미콜론 추가 */
+  max-width: 89vw;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   text-align: right;
   cursor: url('your-cursor.png') 32 32, auto;
-  margin-left: auto;  /* 왼쪽 공간 확보 */
-
+  margin-left: auto;
 }
