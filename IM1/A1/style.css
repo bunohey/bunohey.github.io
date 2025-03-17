@@ -60,6 +60,16 @@ h4 {
   color: #91bcb1;
 }
 
+h5 {
+  font-family: "JetBrains Mono", monospace !important;
+  font-weight: 200;
+  font-style: normal;
+
+  letter-spacing: 1px;
+  line-height: -5;
+  color: #91bcb1;
+}
+
 /*-----------Background-----------*/
 
 :root {
