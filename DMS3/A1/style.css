@@ -101,6 +101,6 @@ body {
   overflow-wrap: break-word;
   white-space: normal;
   text-align: right;
-  cursor: url('your-cursor.png') 32 32, auto;
+  cursor: url(cursor.cur) !important;
   margin-left: auto;
 }
