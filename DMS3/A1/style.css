@@ -101,6 +101,5 @@ body {
   overflow-wrap: break-word;
   white-space: normal;
   text-align: right;
-  cursor: url(cursor.cur) !important;
   margin-left: auto;
 }
