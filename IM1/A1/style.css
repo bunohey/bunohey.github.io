@@ -1,39 +1,38 @@
-@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 /*-----------BUTTON-----------*/
 
 button {
   padding-left: 0px;
-  color: #ffffff;
+  color: #c4a1cd;
   background-color: transparent;
   font-size: 20px;
   border: 0px solid #ffffff;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: -90px;
+  margin-top: 30px;
+  margin-left: 60px;
   float: left;
 }
 
 button:hover {
-  color: #fe7db7;
+  color: #8bbcb8;
   background-color: transparent;
 }
 
 /*---------PARAGRAPH---------*/
 
 h1 {
-  font-family: "DotGothic16", sans-serif !important;
-  font-weight: 1;
+  font-family: "JetBrains Mono", monospace !important;
+  font-weight: 300;
   font-style: normal;
-  letter-spacing: 65px;
-  line-height: 2;
-  color: #272727;
+  letter-spacing: 20px;
+  line-height: 5;
+  color: #635555;
 }
 
 h2 {
-  padding-right: 60px;
-  font-family: "DotGothic16", sans-serif !important;
-  font-weight: 300;
+  font-family: "JetBrains Mono", monospace !important;
+  font-weight: 400;
   font-style: normal;
 
   letter-spacing: 4px;
@@ -42,64 +41,41 @@ h2 {
 }
 
 h3 {
-  padding-right: 50px;
-  font-family: "DotGothic16", sans-serif !important;
+  font-family: "JetBrains Mono", monospace !important;
   font-weight: 400;
   font-style: normal;
 
-  letter-spacing: 0px;
-  line-height: 3.5;
-  color: #b7b7b7
+  letter-spacing: 1px;
+  line-height: -5;
+  color: #6e5c74;
 }
 
 h4 {
-  padding-right: 63px;
-  font-family: "DotGothic16", sans-serif !important;
-  font-weight: 1000;
+  font-family: "JetBrains Mono", monospace !important;
+  font-weight: 200;
   font-style: normal;
 
-  letter-spacing: 0px;
-  line-height: 0;
+  letter-spacing: 1px;
+  line-height: -5;
+  color: #91bcb1;
 }
-
-h4, h4 a, p a, div a {
-  color: #ee95bb;
-}
-
-h4 a:visited, p a:visited, div a:visited {
-  color: #ee95bb;
-}
-
-h4 a:hover, p a:hover, div a:hover {
-  color: #ee4848;
-  text-decoration: underline;}
-
-  h5 {
-    padding-right: 50px;
-    font-family: "DotGothic16", sans-serif !important;
-    font-weight: 400;
-    font-style: normal;
-  
-    letter-spacing: 0px;
-    line-height: 2;
-    color: #393838;
-  }
 
 /*-----------Background-----------*/
 
 :root {
-  background-color: #ebfeff;
-  background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg);
+  background-color: #ffffff;
+  background-image: url(https://i.pinimg.com/736x/d5/e2/d4/d5e2d440b57839a03ae7d05abb13dc83.jpg);
+  background-position-x: center;
+  background-position-y: 10%;
+  background-size: 20%;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100;
 }
 
 body {
-  max-width: 89vw;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-  text-align: right;
+  text-align: center;
   margin-left: auto;
+  cursor: url('cursor.cur'), auto;
 }
