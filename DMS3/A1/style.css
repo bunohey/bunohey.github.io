@@ -67,7 +67,7 @@ h4, h4 a, p a, div a {
 }
 
 h4 a:visited, p a:visited, div a:visited {
-  color: #ee95bb;
+  color: #ffb3d4;
 }
 
 h4 a:hover, p a:hover, div a:hover {
@@ -86,16 +86,13 @@ h4 a:hover, p a:hover, div a:hover {
   }
 
 /*-----------Background-----------*/
-
-:root {
+body {
   background-color: #ebfeff;
   background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100;
-}
 
-body {
   max-width: 89vw;
   word-wrap: break-word;
   overflow-wrap: break-word;

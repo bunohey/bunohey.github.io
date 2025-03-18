@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
+/*-----------BUTTON-----------*/
 button {
     font-family: "DotGothic16", sans-serif !important;
     font-weight: 1px;
@@ -34,7 +35,7 @@ h2 {
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 300;
   font-style: normal;
-  text-shadow: #927f8bdd 2px 2px;
+  text-shadow: #6b6569e2 2px 2px;
 
   letter-spacing: 4px;
   line-height: 1.5;
@@ -85,14 +86,12 @@ h6 {
   color: #fffafa;
 }
 
-:root {
+/*-----------Background-----------*/
+body {
   background-image: url("https://i.pinimg.com/474x/be/95/c8/be95c8eb8f4882f9e19163c96b10bc0c.jpg");
   background-size: 20%;
   background-repeat: repeat;
-}
 
-
-body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
@@ -113,7 +112,7 @@ body {
 .box2 {
   border: 2px solid #eebbde;
   padding-top: 3px;
-  padding-bottom: 25px;
+  padding-bottom: 30px;
   padding-left: 50px;
   padding-right: 50px;
   display: inline-block;

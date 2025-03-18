@@ -60,28 +60,15 @@ h4 {
   color: #91bcb1;
 }
 
-h5 {
-  font-family: "JetBrains Mono", monospace !important;
-  font-weight: 200;
-  font-style: normal;
-
-  letter-spacing: 1px;
-  line-height: -5;
-  color: #91bcb1;
-}
-
 /*-----------Background-----------*/
-
-:root {
+body {
   background-color: #ffffff;
   background-image: url(https://i.pinimg.com/736x/d5/e2/d4/d5e2d440b57839a03ae7d05abb13dc83.jpg);
   background-position-x: center;
   background-position-y: 10%;
   background-size: 20%;
   background-repeat: no-repeat;
-}
 
-body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
