@@ -68,6 +68,7 @@ h5 {
   font-weight: 100;
   font-style: normal;
   font-size: 1.5rem;
+  text-shadow: #64515e9a 0.125rem 0.125rem;
 
   letter-spacing: 0.625rem;
   line-height: 0rem;
@@ -118,3 +119,12 @@ body {
   display: inline-block;
   background-color: rgba(217, 179, 206, 0.584);
 }
+
+//*폰트 모음
+"VT323", monospace !important;
+https://fonts.google.com/specimen/Rubik+Iso?lang=en_Latn
+https://fonts.google.com/specimen/Jacquard+12?lang=en_Latn
+https://fonts.google.com/specimen/Jacquarda+Bastarda+9+Charted?lang=en_Latn
+https://fonts.google.com/specimen/Workbench?lang=en_Latn
+https://fonts.google.com/specimen/Jacquarda+Bastarda+9?lang=en_Latn
+https://fonts.google.com/specimen/Rubik+Broken+Fax?lang=en_Latn

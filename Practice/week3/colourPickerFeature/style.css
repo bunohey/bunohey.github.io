@@ -6,10 +6,10 @@
 }
 
 :root{
-  --col01:#171219;
-  --col02:#f2fbeb;
-  --col03:#5252ff;
-  --col04:#b6e878;
+  --col01:#000000;
+  --col02:#ffffff;
+  --col03:#4e4eff;
+  --col04:#ff2d9d;
   --border: solid 0.5rem var(--col02);
 }
 

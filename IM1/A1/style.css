@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,393;1,393&family=VT323&display=swap');
 /*-----------BUTTON-----------*/
 
 button {
@@ -22,7 +21,7 @@ button:hover {
 /*---------PARAGRAPH---------*/
 
 h1 {
-  font-family: "DotGothic16", sans-serif !important;
+  font-family: "VT323", monospace !important;
   font-weight: 300;
   font-style: normal;
   letter-spacing: 20px;
@@ -31,7 +30,7 @@ h1 {
 }
 
 h2 {
-  font-family: "DotGothic16", sans-serif !important;
+  font-family: "VT323", monospace !important;
   font-weight: 400;
   font-style: normal;
 
@@ -41,7 +40,7 @@ h2 {
 }
 
 h3 {
-  font-family: "DotGothic16", sans-serif !important;
+  font-family: "VT323", monospace !important;
   font-weight: 400;
   font-style: normal;
 
@@ -51,7 +50,7 @@ h3 {
 }
 
 h4 {
-  font-family: "DotGothic16", sans-serif !important;
+  font-family: "VT323", monospace !important;
   font-weight: 200;
   font-style: normal;
 
@@ -63,16 +62,17 @@ h4 {
 /*-----------Background-----------*/
 body {
   background-color: #ffffff;
-  background-image: url(https://i.pinimg.com/736x/d5/e2/d4/d5e2d440b57839a03ae7d05abb13dc83.jpg);
-  background-position-x: center;
-  background-position-y: 10%;
-  background-size: 20%;
+  background-image: 
+    url("https://i.pinimg.com/736x/a7/86/30/a7863019ba8ae2a0625b25b9be335af8.jpg"),
+    url("https://i.pinimg.com/736x/20/74/2b/20742b7cc6ad25b7e5dd489926650b83.jpg"),
+    url("https://i.pinimg.com/736x/b7/10/88/b71088265e35ca2bf913c355bab1aaf8.jpg");
+  background-position: center top, center center, center bottom;
+  background-size: 60%, 60%, 60%;
   background-repeat: no-repeat;
-
+  
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   text-align: center;
-  margin-left: auto;
   cursor: url('cursor.cur'), auto;
 }
