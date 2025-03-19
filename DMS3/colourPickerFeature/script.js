@@ -27,3 +27,12 @@ function setSquareColour(newColour){
 
 /* below is an example call to the function : because its just in the script it'll run when the page is loaded */
 setSquareColour('red');
+
+let colourPicker = document.getElementById("colour-picker");
+
+colourPicker.addEventListener("input", PickingColour);
+
+function PickingColour(e) {
+    //console.log(e.target);
+    setSquareColour(e.target.value);
+}
