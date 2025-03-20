@@ -61,6 +61,19 @@ h4 {
   color: #89ad9d;
 }
 
+h4 a {
+  color: #ff85ba;
+}
+
+h4 a:visited, p a:visited, div a:visited {
+  color: #ff85ba;
+}
+
+h4 a:hover, p a:hover, div a:hover {
+  color: #877ce0;
+  text-decoration: underline;}
+
+
 /*-----------Background-----------*/
 body {
   background-color: #ffffff;
