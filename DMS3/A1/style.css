@@ -9,8 +9,8 @@ button {
   font-size: 1.1rem;
   border: 0px solid #ffffff;
   cursor: pointer;
-  margin-top: 1rem;
-  margin-left: -6rem;
+  margin-top: 1vh;
+  margin-left: -6vw;
   float: left;
 }
 
@@ -88,7 +88,8 @@ h4 a:hover, p a:hover, div a:hover {
 /*-----------Background-----------*/
 body {
   background-color: #ebfeff;
-  background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg);
+  background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg); 
+  <!----image by @martin.leib---->
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100;

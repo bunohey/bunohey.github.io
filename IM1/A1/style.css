@@ -80,7 +80,7 @@ body {
   background-image: 
     url("https://i.pinimg.com/736x/a7/86/30/a7863019ba8ae2a0625b25b9be335af8.jpg"),
     url("https://i.pinimg.com/736x/20/74/2b/20742b7cc6ad25b7e5dd489926650b83.jpg"),
-    url("https://i.pinimg.com/736x/b7/10/88/b71088265e35ca2bf913c355bab1aaf8.jpg");
+    url("https://i.pinimg.com/736x/b7/10/88/b71088265e35ca2bf913c355bab1aaf8.jpg"); /*----images by iStock----*/
   background-position: center 2%, center center, center 95%;
   background-size: 30vw, 30vw, 30vw;
   background-repeat: no-repeat;

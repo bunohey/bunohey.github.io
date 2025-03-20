@@ -5,28 +5,28 @@ button {
     font-family: "DotGothic16", sans-serif !important;
     font-weight: 0.0625rem;
     font-style: normal;
-    
     letter-spacing: 0.25rem;
     line-height: 0.625rem;
     color: #000000;
 
     background-color: transparent;
-    font-size: 100%;
+    font-size: 1rem;
     border: 0rem solid #ffffff;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     color: #ffffff;
     background-color: transparent;
-  }
+}
 
 h1 {
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 600;
   font-style: normal;
-  letter-spacing: 1.625rem; 
-  line-height: 0.8125rem;
+  font-size: 2.2vw;
+  letter-spacing: 1.1rem; 
+  line-height: 1.25vh;
   color: #000000;
 }
 
@@ -36,15 +36,16 @@ h2 {
   font-style: normal;
   text-shadow: #6b6569e2 0.125rem 0.125rem;
   letter-spacing: 0.25rem;
-  line-height: 1.5;
+  line-height: 2.1rem;
   color: #ffa8e0;
+  font-size: 1.5vw;
 }
 
 h3 {
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 1;
   font-style: normal;
-  font-size: 90%;  
+  font-size: 0.9rem;
   letter-spacing: 0.125rem;
   line-height: -0.25rem;
   color: #000000;
@@ -57,13 +58,14 @@ h4 {
   letter-spacing: 0rem;
   line-height: 0rem;
   color: #838383;
+  font-size: 1vw;
 }
 
 h5 {
   font-family: "DotGothic16", sans-serif !important;
   font-weight: 100;
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-shadow: #64515e9a 0.125rem 0.125rem;
   letter-spacing: 0.625rem;
   line-height: 0rem;
@@ -77,14 +79,14 @@ h6 {
   font-size: 0.8rem;
   text-shadow: #00000075 0.125rem 0.125rem;
   letter-spacing: 0.0625rem;
-  line-height: 3.125rem;
+  line-height: 1.5625rem;
   color: #fffafa;
 }
 
 /*-----------Background-----------*/
 body {
-  background-image: url("https://i.pinimg.com/474x/be/95/c8/be95c8eb8f4882f9e19163c96b10bc0c.jpg");
-  background-size: 20vw;
+  background-image: url("https://i.pinimg.com/474x/be/95/c8/be95c8eb8f4882f9e19163c96b10bc0c.jpg"); /* img by Linwood */
+  background-size: 10vw;
   background-repeat: repeat;
 
   word-wrap: break-word;
@@ -96,29 +98,20 @@ body {
 
 .box {
   border: 0.125rem solid #e6b1d5;
-  padding-top: 0.9375rem;
-  padding-bottom: 1.5625rem;
-  padding-left: 3.125rem;
-  padding-right: 3.125rem;
+  padding-top: 0.75rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5vw; 
+  padding-right: 2.5vw;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.617);
 }
 
 .box2 {
   border: 0.125rem solid #eebbde;
-  padding-top: 0.1875rem;
-  padding-bottom: 1.875rem;
-  padding-left: 3.125rem;
-  padding-right: 3.125rem;
+  padding-top: 0.25rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
   display: inline-block;
   background-color: rgba(217, 179, 206, 0.584);
 }
-
-/*폰트 모음
-"VT323", monospace !important;
-https://fonts.google.com/specimen/Rubik+Iso?lang=en_Latn
-https://fonts.google.com/specimen/Jacquard+12?lang=en_Latn
-https://fonts.google.com/specimen/Jacquarda+Bastarda+9+Charted?lang=en_Latn
-https://fonts.google.com/specimen/Workbench?lang=en_Latn
-https://fonts.google.com/specimen/Jacquarda+Bastarda+9?lang=en_Latn
-https://fonts.google.com/specimen/Rubik+Broken+Fax?lang=en_Latn
