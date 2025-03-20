@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,393;1,393&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ramaraja&family=VT323&display=swap');
 /*-----------BUTTON-----------*/
 
 button {
@@ -21,42 +21,46 @@ button:hover {
 /*---------PARAGRAPH---------*/
 
 h1 {
-  font-family: "VT323", monospace !important;
-  font-weight: 300;
+  font-family: "Ramaraja", serif;
+  font-weight: 400;
   font-style: normal;
-  letter-spacing: 20px;
+  font-size: xx-large;
+
+  letter-spacing: 5px;
   line-height: 5;
-  color: #635555;
+  color: #6a576d;
 }
 
 h2 {
-  font-family: "VT323", monospace !important;
-  font-weight: 400;
+  font-family: "Ramaraja", serif;
+  font-weight: 1;
   font-style: normal;
 
-  letter-spacing: 4px;
-  line-height: -5;
-  color: #4f816e;
+  letter-spacing: 0px;
+  line-height: 5;
+  color: #d0a1b4;
 }
 
 h3 {
-  font-family: "VT323", monospace !important;
-  font-weight: 400;
+  font-family: "Ramaraja", serif;
+  font-weight: 100;
   font-style: normal;
+  font-size: x-large;
 
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   line-height: 5;
-  color: #6e5c74;
+  color: #a69ca9;
 }
 
 h4 {
-  font-family: "VT323", monospace !important;
-  font-weight: 200;
+  font-family: "Ramaraja", serif;
+  font-weight: 1;
   font-style: normal;
+  font-size: larger;
 
   letter-spacing: 1px;
-  line-height: -5;
-  color: #91bcb1;
+  line-height: -10;
+  color: #313131;
 }
 
 /*-----------Background-----------*/
@@ -67,7 +71,7 @@ body {
     url("https://i.pinimg.com/736x/20/74/2b/20742b7cc6ad25b7e5dd489926650b83.jpg"),
     url("https://i.pinimg.com/736x/b7/10/88/b71088265e35ca2bf913c355bab1aaf8.jpg");
   background-position: center top, center center, center bottom;
-  background-size: 60%, 60%, 60%;
+  background-size: 30%, 30%, 30%;
   background-repeat: no-repeat;
   
   word-wrap: break-word;
