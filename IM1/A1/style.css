@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Ramaraja&family=VT323&display=swap');
-/*-----------BUTTON-----------*/
 
+/*-----------BUTTON-----------*/
 button {
-  padding-left: 0px;
+  padding-left: 0rem;
   color: #c4a1cd;
   background-color: transparent;
-  font-size: 20px;
-  border: 0px solid #ffffff;
+  font-size: 1.1rem;
+  border: 0px solid#ffffff;
   cursor: pointer;
-  margin-top: 30px;
-  margin-left: 60px;
+  margin-top: 1vh;
+  margin-left: 2vw;
   float: left;
 }
 
@@ -24,43 +24,41 @@ h1 {
   font-family: "Ramaraja", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: xx-large;
-
-  letter-spacing: 5px;
-  line-height: 5;
-  color: #6a576d;
+  font-size: 2.15vw;
+  letter-spacing: 1.2vw;
+  line-height: 7vh;
+  color: #79626d;
 }
 
 h2 {
   font-family: "Ramaraja", serif;
   font-weight: 1;
   font-style: normal;
-
-  letter-spacing: 0px;
-  line-height: 5;
+  font-size: 1.3vw;
+  letter-spacing: 0rem;
+  line-height: 5vh;
   color: #d0a1b4;
 }
+
 
 h3 {
   font-family: "Ramaraja", serif;
   font-weight: 100;
   font-style: normal;
-  font-size: x-large;
-
-  letter-spacing: 0.5px;
-  line-height: 5;
-  color: #a69ca9;
+  font-size: 1.2vw;
+  letter-spacing: 0rem;
+  line-height: 1vh;
+  color: #595859;
 }
 
 h4 {
   font-family: "Ramaraja", serif;
   font-weight: 1;
   font-style: normal;
-  font-size: larger;
-
-  letter-spacing: 1px;
-  line-height: -10;
-  color: #313131;
+  font-size: 1.25vw;
+  letter-spacing: 0rem;
+  line-height: 5vh;
+  color: #89ad9d;
 }
 
 /*-----------Background-----------*/
@@ -70,10 +68,10 @@ body {
     url("https://i.pinimg.com/736x/a7/86/30/a7863019ba8ae2a0625b25b9be335af8.jpg"),
     url("https://i.pinimg.com/736x/20/74/2b/20742b7cc6ad25b7e5dd489926650b83.jpg"),
     url("https://i.pinimg.com/736x/b7/10/88/b71088265e35ca2bf913c355bab1aaf8.jpg");
-  background-position: center top, center center, center bottom;
-  background-size: 30%, 30%, 30%;
+  background-position: center 2%, center center, center 95%;
+  background-size: 30vw, 30vw, 30vw;
   background-repeat: no-repeat;
-  
+
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
