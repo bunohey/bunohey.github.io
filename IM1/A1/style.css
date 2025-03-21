@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ramaraja&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@0;1&family=VT323&display=swap');
 
 /*-----------BUTTON-----------*/
 button {
@@ -21,56 +22,59 @@ button:hover {
 /*---------PARAGRAPH---------*/
 
 h1 {
-  font-family: "Ramaraja", serif;
-  font-weight: 400;
+  font-family: "IM Fell Great Primer", serif;
+  font-weight: 40000;
   font-style: normal;
   font-size: 2.15vw;
   letter-spacing: 1.2vw;
   line-height: 7vh;
-  color: #79626d;
+  color: #ccaad0;
 }
 
 h2 {
-  font-family: "Ramaraja", serif;
+  font-family: "IM Fell Great Primer", serif;
   font-weight: 1;
   font-style: normal;
-  font-size: 1.3vw;
+  font-size: 1vw;
   letter-spacing: 0rem;
-  line-height: 5vh;
-  color: #d0a1b4;
+  line-height: 1vh;
+  color: #bababa;
+  text-align: right;
+  margin-right: 24vw;
 }
 
 
 h3 {
-  font-family: "Ramaraja", serif;
-  font-weight: 100;
-  font-style: normal;
+  font-family: "IM Fell Great Primer", serif;
+  font-weight: 400;
+  font-style: italic;
   font-size: 1.2vw;
   letter-spacing: 0rem;
   line-height: 1vh;
-  color: #595859;
+  color: #6c6767;
 }
 
 h4 {
-  font-family: "Ramaraja", serif;
+  font-family: "IM Fell Great Primer", serif;
   font-weight: 1;
   font-style: normal;
-  font-size: 1.25vw;
+  font-size: 1.1vw;
   letter-spacing: 0rem;
   line-height: 5vh;
-  color: #89ad9d;
+  color: #af9baf;
 }
 
 h4 a {
-  color: #ff85ba;
+  color: #9db7e0;
+  font-size: 1vw;
 }
 
-h4 a:visited, p a:visited, div a:visited {
-  color: #ff85ba;
+h4 a:visited {
+  color: #9db7e0;
 }
 
-h4 a:hover, p a:hover, div a:hover {
-  color: #877ce0;
+h4 a:hover {
+  color: #707ae8;
   text-decoration: underline;}
 
 
