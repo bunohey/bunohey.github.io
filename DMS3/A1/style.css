@@ -91,8 +91,7 @@ body {
   background-image: url(https://i.pinimg.com/736x/f1/e1/ff/f1e1ffbf6213ce7350c8da1bfb7122e1.jpg);   /*----image by @martin.leib----*/
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100% 100;
-  background-position: left;
+  background-size: 100% 100%;
 
   max-width: 89vw;
   word-wrap: break-word;
