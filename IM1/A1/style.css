@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ramaraja&family=VT323&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@0;1&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@0;1&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
 
 /*-----------BUTTON-----------*/
 button {
@@ -9,8 +8,8 @@ button {
   font-size: 1.1rem;
   border: 0px solid#ffffff;
   cursor: pointer;
-  margin-top: 1vh;
-  margin-left: 2vw;
+  margin-top: 2.4vh;
+  margin-left: 2.4vw;
   float: left;
 }
 
@@ -22,25 +21,23 @@ button:hover {
 /*---------PARAGRAPH---------*/
 
 h1 {
-  font-family: "IM Fell Great Primer", serif;
-  font-weight: 40000;
+  font-family: "Libre Bodoni", serif;
+  font-weight: 100;
   font-style: normal;
-  font-size: 2.15vw;
-  letter-spacing: 1.2vw;
-  line-height: 7vh;
-  color: #ccaad0;
+  font-size: 2vw;
+  letter-spacing: 2vw;
+  line-height: 6.5vh;
+  color: #89848e;
 }
 
 h2 {
-  font-family: "IM Fell Great Primer", serif;
-  font-weight: 1;
+  font-family: "Libre Bodoni", serif;
+  font-weight: 400;
   font-style: normal;
-  font-size: 1vw;
-  letter-spacing: 0rem;
-  line-height: 1vh;
-  color: #bababa;
-  text-align: right;
-  margin-right: 24vw;
+  font-size: 1.5vw;
+  letter-spacing: 0.3vw;
+  line-height: 5vh;
+  color: #baabc8;
 }
 
 
@@ -51,31 +48,33 @@ h3 {
   font-size: 1.2vw;
   letter-spacing: 0rem;
   line-height: 1vh;
-  color: #6c6767;
+  color: #343232;
 }
 
 h4 {
-  font-family: "IM Fell Great Primer", serif;
+  font-family: "Libre Bodoni", serif;
   font-weight: 1;
   font-style: normal;
   font-size: 1.1vw;
   letter-spacing: 0rem;
   line-height: 5vh;
-  color: #af9baf;
+  color: #b5b5b5;
 }
 
 h4 a {
-  color: #9db7e0;
+  color: #f0bae6;
   font-size: 1vw;
 }
 
 h4 a:visited {
-  color: #9db7e0;
+  color: #f0bae6;
 }
 
 h4 a:hover {
-  color: #707ae8;
+  color: #ffa5ef;;
   text-decoration: underline;}
+
+
 
 
 /*-----------Background-----------*/
