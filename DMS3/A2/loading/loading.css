@@ -1,0 +1,79 @@
+p {
+  font-family: "Jacquard 12", system-ui;
+  font-size: 1.3rem;
+  font-weight: 1;
+  letter-spacing: 0.3vw;
+  margin: 1rem;
+  color: #ffffff;
+}
+
+h1 {
+  font-family: "Jacquard 12", system-ui;
+  font-size: 6rem;
+  font-weight: 1;
+  letter-spacing: 1.2vw;
+  margin: 1rem;
+  color: #ff0000;
+  text-shadow: 5px 10px 10px #00000074;
+}
+
+/*-----------Background-----------*/
+
+body {
+  background-image: url("background.jpg"); /* img by FREEPIK */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: fixed;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/*------------Loading-----------*/
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.loading-text {
+  font-family: "Rubik Iso", system-ui;
+  font-size: 3rem;
+  font-weight: 1;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 0;
+  border-right: 2px solid;
+  animation: typing 1.25s steps(15) 0.15s forwards, cursor 0.15s step-end infinite alternate;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  100% { width: 31rem; }
+}
+
+@keyframes cursor {
+  50% { border-color: transparent; }
+}
+
+@keyframes typing2 {
+  0% { width: 0; }
+  100% { width: 21rem; }
+}
+
+/*------------Welcome-----------*/
+
+.welcome {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: fadeOut 0s forwards;
+}

@@ -1,0 +1,11 @@
+/*-----------Background-----------*/
+
+body {
+    background-image: url("background2.jpg"); /* img by FREEPIK */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: fixed;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
