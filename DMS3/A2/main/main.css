@@ -9,3 +9,7 @@ body {
     position: relative;
     overflow: hidden;
   }
+
+#preivew {
+  margin: 0; padding: 0;
+}

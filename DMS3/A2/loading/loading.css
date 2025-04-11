@@ -7,14 +7,12 @@ p {
   color: #ffffff;
 }
 
-h1 {
+h2 {
   font-family: "Jacquard 12", system-ui;
-  font-size: 6rem;
+  font-size: 2rem;
   font-weight: 1;
-  letter-spacing: 1.2vw;
   margin: 1rem;
-  color: #ff0000;
-  text-shadow: 5px 10px 10px #00000074;
+  color: #000000;
 }
 
 /*-----------Background-----------*/
@@ -49,7 +47,7 @@ body {
   display: inline-block;
   width: 0;
   border-right: 2px solid;
-  animation: typing 1.25s steps(15) 0.15s forwards, cursor 0.15s step-end infinite alternate;
+  animation: typing 1.25s steps(15) 0.15s forwards, cursor 0.2s step-end infinite alternate;
 }
 
 @keyframes typing {
@@ -66,14 +64,55 @@ body {
   100% { width: 21rem; }
 }
 
+/*------------Alert-----------*/
+
+.alert {
+  padding: 20px;
+  background-color: #e80000;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  width: 30vw;
+  box-sizing: border-box;
+  box-shadow: 2rem 2rem 2rem #00000085;
+}
+
+#confirmBtn {
+  font-family: "Jacquard 12", system-ui;
+  font-size: 1.3rem;
+  font-weight: 1;
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  transition: 0.15s;
+  display: block;
+  height: 40%;
+  width: 30%;
+  cursor: pointer;
+}
+
+#confirmBtn:hover {
+  background-color: #6a00ff;
+  color: rgb(23, 255, 251);
+}
+
 /*------------Welcome-----------*/
 
 .welcome {
+  font-family: "Jacquard 12", system-ui;
+  font-size: 6rem;
+  font-weight: 1;
+  letter-spacing: 1.2vw;
+  color: #f70000;
   display: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  animation: fadeOut 0s forwards;
+  animation: text-ani 1.5s linear infinite alternate-reverse;
 }
