@@ -4,12 +4,44 @@ body {
     background-image: url("background2.jpg"); /* img by FREEPIK */
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: fixed;
+    background-position: absolute;
     height: 100vh;
     position: relative;
     overflow: hidden;
   }
 
-#preivew {
-  margin: 0; padding: 0;
+/*------- Preview --------*/
+
+.preview {
+  width: 20vw;
+  height: 50vh;
+  position: absolute;
+  right: 4vw;
+  top: 10vh;
+}
+
+
+  /*------- Import & Export button --------*/
+
+  label {
+    font-family: "Rubik Iso", system-ui;
+    font-size: 2rem;
+    margin: 1rem;
+    display: block;
+    color: #4000ff;
+    padding: 1rem;
+    width: 1vw;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+/* etc */
+
+input {
+    display: none;
+
 }
