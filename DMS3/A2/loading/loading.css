@@ -1,3 +1,4 @@
+/* #region Texts */
 p {
   font-family: "Jacquard 12", system-ui;
   font-size: 1.3rem;
@@ -13,10 +14,9 @@ h2 {
   font-weight: 1;
   margin: 1rem;
   color: #000000;
-}
+} /* #endregion */
 
-/*-----------Background-----------*/
-
+/* #region Background */
 body {
   background-image: url("background.jpg"); /* img by FREEPIK */
   background-repeat: no-repeat;
@@ -25,10 +25,9 @@ body {
   height: 100vh;
   position: relative;
   overflow: hidden;
-}
+} /* #endregion */
 
-/*------------Loading-----------*/
-
+/* #region Loading */
 .loading {
   position: absolute;
   top: 50%;
@@ -62,10 +61,9 @@ body {
 @keyframes typing2 {
   0% { width: 0; }
   100% { width: 21rem; }
-}
+} /* #endregion */
 
-/*------------Alert-----------*/
-
+/* #region Alert */
 .alert {
   padding: 20px;
   background-color: #e80000;
@@ -98,10 +96,9 @@ body {
 #confirmBtn:hover {
   background-color: #6a00ff;
   color: rgb(23, 255, 251);
-}
+} /* #endregion */
 
-/*------------Welcome-----------*/
-
+/* #region Welcome */
 .welcome {
   font-family: "Jacquard 12", system-ui;
   font-size: 6rem;
@@ -115,4 +112,4 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
   animation: text-ani 1.5s linear infinite alternate-reverse;
-}
+} /* #endregion */

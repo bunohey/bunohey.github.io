@@ -8,23 +8,31 @@
 
     <link rel="stylesheet" href="../setting/setting.css">
     <link rel="stylesheet" href="main.css">
-
+   
     <script src="http://unpkg.com/tone"></script>
     <script src="https://unpkg.com/konva@9/konva.min.js"></script>
     <script src="main.js" defer></script>
 </head>
 
 <body>
-    <audio autoplay> <source src="wwwwelcome.wav" type="audio/wav"></audio> <!-- mp3 by FreeSound -->
-    <audio autoplay> <source src="backgroundmusic.mp3" type="audio/mp3"></audio> <!-- mp3 by FreeSound -->
+  <audio autoplay>
+    <source src="wwwwelcome.wav" type="audio/wav"></audio> <!-- mp3 by FreeSound -->
+  <audio autoplay>
+    <source src="backgroundmusic.mp3" type="audio/mp3"></audio> <!-- mp3 by FreeSound -->
 
-    <div class="preview">
-            <img src="david.jpg" id="david-pic">
-            <label for="input-file">import</label>
-            <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
-        </div>
+  <h1>gLiTcH N SwiTcH</h1>
+
+  <div class="preview">
+    <div class="image-border">
+        <img src="medusa.jpeg" id="medusa-pic"></div> <!-- img by Adobe Stock -->
+    <div class="button">
+        <label for="input-file">import</label>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+        <label for="export-file">export</label>
+    </div>
     </div>
 
 </body>
+
 
 </html>
