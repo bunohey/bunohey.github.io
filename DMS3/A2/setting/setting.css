@@ -6,7 +6,7 @@ body {
 
 }
 
-#confirmBtn, label:hover {
+button, .button label:hover {
   cursor: url("cursor2.png"), auto; /* img by CustomCursor */
 }
 
