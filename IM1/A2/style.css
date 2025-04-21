@@ -79,7 +79,8 @@ h1 {
     height: 30vh;
     transform: translate(-30%, -50%);
     animation: spin 9s linear infinite;
-}
+    animation-play-state: paused;
+  }
 
 @keyframes spin {
     0% {
