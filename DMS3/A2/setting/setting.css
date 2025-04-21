@@ -6,7 +6,7 @@ body {
 
 }
 
-button, .button label:hover {
+button, .button label, input[type=range]:hover {
   cursor: url("cursor2.png"), auto; /* img by CustomCursor */
 }
 

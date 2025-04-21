@@ -1,0 +1,165 @@
+/* #region theme */
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Cambo&family=Fredericka+the+Great&display=swap');
+
+body {
+    background: linear-gradient(180deg, #c4b8ab, #7e9073, #3f532d, #5f6831, #be9f53, #b85e0a, #dd5202);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: "Fredericka the Great", serif;
+    font-size: 9vh;
+    font-weight: 100;
+    letter-spacing: 0.1vw;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 0;
+} /* #endregion */
+
+/* #region Playlist */
+.playlist {
+    position: fixed;
+    top: 38vh;
+    right: 22vw;
+}
+
+.box {
+    margin: 0.5vh;
+    width: 25vw;
+    padding: 1vh 1.1vw;
+    display: flex;
+    justify-content: space-between;
+    cursor: move;
+
+    background-color: rgba(255, 255, 255, 0.726);
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    span {
+        font-family: "Averia Serif Libre", serif;
+        font-size: 1.3rem;
+        font-weight: 1;
+        letter-spacing: -0.11vw;
+        color: #151515;
+    }
+
+    .song-title {
+        text-align: left;
+    }
+
+    .song-time {
+        text-align: right;
+    }
+} /* #endregion */
+
+/* #region Vinyl */
+.vinyl {
+    position: fixed;
+    top: 53vh;
+    left: 35vw;
+}
+
+#album {
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    height: 35vh;
+    transform: translate(-80%, -50%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
+}
+
+#lp {
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    z-index: -1;
+    height: 30vh;
+    transform: translate(-30%, -50%);
+    animation: spin 9s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-30%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-30%, -50%) rotate(360deg);
+    }
+}
+
+.audioPlayer {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+} /* #endregion */
+
+/* #region Progress bar */
+.progress-bar {
+    height: 1.2vh;
+    width: 25vw;
+    background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 7px;
+    display: flex;
+}
+
+#progress-bar-fill {
+    background-color: #ff9d0082;
+    height: 100%;
+    width: 0%;
+    border-radius: 7px;
+} /* #endregion */
+
+/* #region Controls panel */
+.custom-controls {
+    display: flex;
+    scale: 90%;
+    opacity: 85%;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+button {
+    border-radius: 5px;
+} /* #endregion */
+
+/* #region PARENTS CONTAINER */
+.container {
+    position: relative;
+    width: 70vw;
+    height: 50vh;
+    margin: 2vh auto;
+    background: rgba(0, 0, 0, 0.614);
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(37, 40, 38, 0.308);
+    display: block;
+    z-index: -999;
+}
+
+.audio-player {
+    position: fixed;
+    top: 35vh;
+    right: 19vw;
+    width: 28vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh;
+
+    background: rgba(7, 8, 7, 0.205);
+    border-radius: 6px;
+    padding: 20px;
+    z-index: 1;
+}
+
+.playlist,
+.progress-bar,
+.custom-controls {
+    position: static;
+} /* #endregion */
