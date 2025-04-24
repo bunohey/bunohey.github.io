@@ -79,13 +79,27 @@ function highlightPlayingBox(currentIndex) {
   Sources: Assessment 2 resources,
    https://stackoverflow.com/questions/57497793/calculating-getboundingclientrect-in-percentage */
 
-// Calculate & update the progress of the current song as a % //
+// Update progress bar fill and display current time & duration //
 function updateProgressBar() {
   const value = (currentSong.currentTime / currentSong.duration) * 100;
   document.querySelector("#progress-bar-fill").style.width = value + "%";
+
+  // Update current time and total duration next to the progress bar //
+  const currentTimeElem = document.querySelector("#current-time");
+  const durationElem = document.querySelector("#duration");
+
+  currentTimeElem.textContent = formatTime(currentSong.currentTime);
+  durationElem.textContent = formatTime(currentSong.duration);
 }
 
-// Update each song's progress bar according to the time // 
+// Convert seconds into MM:SS format //
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
+
+// Attach timeupdate event to each song to update the progress bar //
 allSongs.forEach(song => {
   song.addEventListener("timeupdate", updateProgressBar);
 });
@@ -94,28 +108,32 @@ const progressBar = document.querySelector(".progress-bar");
 const progressFill = document.querySelector("#progress-bar-fill");
 let isDragging = false;
 
+// On mouse down, allow progress bar to be draggable //
 progressBar.addEventListener("mousedown", (e) => {
-  isDragging = true; // draggable timeline bar //
+  isDragging = true;
   seek(e);
 });
 
-// If move the progress bar, update the song's current time //
+// Update song's current time while dragging //
 document.addEventListener("mousemove", (e) => {
   if (isDragging) seek(e);
 });
 
-// If release the mouse btn, stop dragging //
+// On mouse up, stop dragging //
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
 
-// Update the song's current time on the progress bar //
+// Seek the song to a specific point based on mouse position //
 function seek(e) {
   if (!currentSong) return;
-  const rect = progressBar.getBoundingClientRect(); // Get the bar's X-axis //
-  let percentage = (e.clientX - rect.left) / rect.width; // Calculate the clicked position as a % //
+  const rect = progressBar.getBoundingClientRect();
+  let percentage = (e.clientX - rect.left) / rect.width;
   percentage = Math.max(0, Math.min(1, percentage));
-  currentSong.currentTime = percentage * currentSong.duration; // Set the song's current time based on the % //
+  currentSong.currentTime = percentage * currentSong.duration;
+
+  // Update the bar and time during seek //
+  updateProgressBar();
 }
 // #endregion //
 

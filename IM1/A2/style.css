@@ -43,6 +43,23 @@ body::before {
     pointer-events: none;
     z-index: 999;
 }
+
+header a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    margin-top: 2vh;
+    margin-left: 2vw;
+    letter-spacing: -0.1rem;
+    font-weight: 800;
+    color: #000000;
+    position: absolute;
+    text-decoration: none;
+    text-shadow: 2px 2px 2px #ffffff80;
+}
+
+header a:hover {
+    color: #d40000;
+}
 /* #endregion */
 
 /* #region Scrolling Text */
@@ -138,6 +155,7 @@ h3 {
     box-shadow: 1.2px 1.2px 0.8px rgb(0, 0, 0);
 
     span {
+        font-family: Arial, Helvetica, sans-serif;;
         font-size: 1.1rem;
         font-weight: 1;
         letter-spacing: -0.02vw;
@@ -162,7 +180,8 @@ h3 {
     .box.playing span {
         color: #ffffff;
         font-weight: bold;
-    }/* #endregion */
+    }
+/* #endregion */
 
 /* #region Vinyl */
 .vinyl {
@@ -203,20 +222,47 @@ h3 {
 /* #endregion */
 
 /* #region Progress bar */
+.bar-container {
+    flex: 1;
+    height: 100%;
+    background-color: transparent;
+}
+
 .progress-bar {
     height: 1.3vh;
-    width: 24vw;
+    width: 22vw;
     background-color: rgba(203, 203, 203, 0.292);
     border-radius: 2px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-    #progress-bar-fill {
-        background-color: #ea1400;
-        height: 100%;
-        width: 0%;
-        border-radius: 2px;
-    } /* #endregion */
+
+#progress-bar-fill {
+    background-color: #ea1400;
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.2s;
+}
+
+#current-time {
+    position: absolute;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffffb0;
+    left: 5%;
+}
+
+#duration {
+    position: absolute;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffffb0;
+    right: 5%;
+}
+/* #endregion */
 
 /* #region Controls panel */
 .custom-controls {
@@ -227,9 +273,10 @@ h3 {
     width: 70%;
 }
 
-    button {
-        border-radius: 5px;
-    } /* #endregion */
+button {
+    border-radius: 5px;
+}
+/* #endregion */
 
 /* #region PARENTS CONTAINER */
     .audio-player {
@@ -242,7 +289,7 @@ h3 {
         align-items: center;
         gap: 2vh;
         padding: 2vh;
-        background: rgba(14, 14, 14, 0.648);
+        background: rgba(14, 14, 14, 0.808);
         border-radius: 5px;
         width: auto;
         height: auto;
