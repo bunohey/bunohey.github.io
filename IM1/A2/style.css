@@ -1,5 +1,6 @@
-/* #region theme */
+/* #region Background */
 @import url('https://fonts.googleapis.com/css2?family=Cambo&family=Fredericka+the+Great&family=Inconsolata:wght@200..900&display=swap');
+
 
 html, body {
     height: 100%;
@@ -29,7 +30,6 @@ body::after {
     pointer-events: none;
     z-index: 500;
 }
-
 body::before {
     content: "";
     position: fixed;
@@ -56,21 +56,20 @@ h1 {
     white-space: nowrap;
     z-index: 1000;
     animation: scrollingH1 90s linear infinite;
-    bottom: 0vh;
+    bottom: 0vh; 
     left: -200%;
 }
 
-@keyframes scrollingH1 {
-    0% {
-        left: -60%;
+    @keyframes scrollingH1 {
+        0% {
+            left: -60%;
+        }
+        100% {
+            left: 150%;
+        }
     }
-    100% {
-        left: 150%;
-    }
-}
 
 h2 {
-    font-family: "Cambo", serif;
     font-size: 8vh;
     font-weight: 800;
     color: #000000;
@@ -80,24 +79,23 @@ h2 {
     letter-spacing: -0.1vw;
     white-space: nowrap;
     animation: scrollingH2 100s linear infinite;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(90deg);
+    transform: translate(-33%) rotate(90deg);
 }
 
-@keyframes scrollingH2 {
-    0% {
-        bottom: -600%;
+    @keyframes scrollingH2 {
+        0% {
+            bottom: -600%;
+        }
+        100% {
+            bottom: 300%;
+        }
     }
-    100% {
-        bottom: 300%;
-    }
-}
+    
 
 h3 {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.8vh;
-    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 1;
     letter-spacing: -0.06vw;
     position: absolute;
     bottom: 22vh;
@@ -108,14 +106,14 @@ h3 {
     animation: scrollingH3 260s linear infinite;
 }
 
-@keyframes scrollingH3 {
-    0% {
-        left: 60%;
+    @keyframes scrollingH3 {
+        0% {
+            left: 60%;
+        }
+        100% {
+            left: -800%;
+        }
     }
-    100% {
-        left: -800%;
-    }
-}
 /* #endregion */
 
 /* #region Playlist */
@@ -133,38 +131,38 @@ h3 {
     display: flex;
     justify-content: space-between;
     cursor: move;
+
     background-color: rgba(255, 255, 255, 0.946);
     border: 1.4px solid #000000;
     border-radius: 2.5px;
     box-shadow: 1.2px 1.2px 0.8px rgb(0, 0, 0);
-}
 
-.box span {
-    font-size: 1.1rem;
-    font-weight: 100;
-    letter-spacing: -0.02vw;
-    color: #151515;
-}
+    span {
+        font-size: 1.1rem;
+        font-weight: 1;
+        letter-spacing: -0.02vw;
+        color: #151515;
+    }
 
-.song-title {
-    text-align: left;
-}
+    .song-title {
+        text-align: left;
+    }
 
-.song-time {
-    text-align: right;
-}
+    .song-time {
+        text-align: right;
+    }
+} 
 
-.box.playing {
-    background-color: #e0e1de99;
-    border: 1px solid #686868;
-    box-shadow: 0 0 10px rgba(74, 74, 74, 0.4);
-}
+    .box.playing {
+        background-color: #e0e1de99;
+        border: 1px solid #686868;
+        box-shadow: 0 0 10px rgba(74, 74, 74, 0.4);
+    }
 
-.box.playing span {
-    color: #ffffff;
-    font-weight: bold;
-}
-/* #endregion */
+    .box.playing span {
+        color: #ffffff;
+        font-weight: bold;
+    }/* #endregion */
 
 /* #region Vinyl */
 .vinyl {
@@ -175,32 +173,33 @@ h3 {
     z-index: 777;
 }
 
-#album {
-    height: 30vh;
-    position: relative;
-    bottom: 10vh;
-    right: 4.5vw;
-    z-index: 777;
-}
-
-#lp {
-    height: 30vh;
-    position: relative;
-    bottom: 0.1vh;
-    right: 7vw;
-    z-index: 666;
-    animation: spin 9s linear infinite;
-    animation-play-state: paused;
-}
-
-@keyframes spin {
-    0% {
-        transform: translate(-30%, -50%) rotate(0deg);
+    #album {
+        height: 30vh;
+        position: relative;
+        bottom: 10vh;
+        right: 4.5vw;
+        z-index: 777;
     }
-    100% {
-        transform: translate(-30%, -50%) rotate(360deg);
+
+    #lp {
+        height: 30vh;
+        position: relative;
+        bottom: 0.1vh;
+        right: 7vw;
+        z-index: 666;
+        animation: spin 9s linear infinite;
+        animation-play-state: paused;
     }
-}
+
+        @keyframes spin {
+            0% {
+                transform: translate(-30%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-30%, -50%) rotate(360deg);
+            }
+        }
+        
 /* #endregion */
 
 /* #region Progress bar */
@@ -212,13 +211,12 @@ h3 {
     display: flex;
 }
 
-#progress-bar-fill {
-    background-color: #ea1400;
-    height: 100%;
-    width: 0%;
-    border-radius: 2px;
-}
-/* #endregion */
+    #progress-bar-fill {
+        background-color: #ea1400;
+        height: 100%;
+        width: 0%;
+        border-radius: 2px;
+    } /* #endregion */
 
 /* #region Controls panel */
 .custom-controls {
@@ -229,31 +227,29 @@ h3 {
     width: 70%;
 }
 
-button {
-    border-radius: 5px;
-}
-/* #endregion */
+    button {
+        border-radius: 5px;
+    } /* #endregion */
 
 /* #region PARENTS CONTAINER */
-.audio-player {
-    position: fixed;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2vh;
-    padding: 2vh;
-    background: rgba(14, 14, 14, 0.648);
-    border-radius: 5px;
-    width: auto;
-    height: auto;
-}
+    .audio-player {
+        position: fixed;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2vh;
+        padding: 2vh;
+        background: rgba(14, 14, 14, 0.648);
+        border-radius: 5px;
+        width: auto;
+        height: auto;
+    }
 
-.playlist,
-.progress-bar,
-.custom-controls {
-    position: static;
-}
-/* #endregion */
+    .playlist,
+    .progress-bar,
+    .custom-controls {
+        position: static;
+    } /* #endregion */
