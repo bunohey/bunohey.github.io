@@ -28,3 +28,12 @@ document.getElementById("export-label").addEventListener("click", function() {
     link.click();
   }, "image/png");
 }); /* #endregion */
+
+/* #region Audio Toggle button */
+const bgMusic = document.getElementById('bgmusic');
+const muteToggle = document.getElementById('mute-toggle');
+
+muteToggle.addEventListener('click', () => {
+  bgMusic.muted = !bgMusic.muted;
+  muteToggle.src = bgMusic.muted ? 'mute.png' : 'play.png';
+}); /* #endregion */
