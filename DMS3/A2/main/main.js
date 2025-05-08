@@ -109,6 +109,8 @@ function exportImage() {
 /* #region Control Panel */
 
   /* #region Apply Progress */
+  let previousStrength = {};
+  
   function applyGlitchEffect() {
     if (!imageNode || !currentImageData) return;
 
@@ -127,12 +129,69 @@ function exportImage() {
     const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
 
+    
+    // Apply effects if slider values have changed
+    const effects = [
+      applyRgbShift,
+      applySaturation,
+      applyNoise,
+      applyScramble,
+      applySorting,
+      applyChromaticAberration,
+      applyPixelation,
+      applyBitDepthReduction,
+      applyScanLine,
+      applyBlur
+    ];
+    
+    // Iterate over the sliders (1 to 10)
+    for (let i = 1; i <= 10; i++) {
+      const sliderValue = ranges[`var${i}Range`].value;
+      const effectKey = Object.keys(previousStrength)[i - 1]; // previousStrength keys (rgbShift, saturation, etc.)
+    
+      if (previousStrength[effectKey] !== sliderValue) {
+        effects[i - 1](data, width, height); // Apply the corresponding effect
+        previousStrength[effectKey] = sliderValue; // Update previous strength for that effect
+      }
+    }
+  
     // Apply effects
-    applyRgbShift(data, width, height);  // Apply RGB Shift
-    applySaturation(data); // Apply Saturation
-    applyNoise(data); // Apply Noise
-    applyBitDepthReduction(data); // Apply Bit Depth
-    applyScanLine(data, width, height); // Apply Scan Line
+    applyRgbShift(data, width, height);
+    function applySaturation(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyNoise(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyScramble(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applySorting(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyChromaticAberration(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyPixelation(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyBitDepthReduction(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyScanLine(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
+    
+    function applyBlur(data, width, height) {
+      // 아직 구현 안 함. 에러 방지용 빈 함수
+    }
 
     // Put the modified image data back to the glitch canvas
     ctx.putImageData(imageData, 0, 0);
@@ -146,23 +205,29 @@ function exportImage() {
 
     /* #region RGB SHIFT */
     function applyRgbShift(data, width, height) {
-      const shiftAmount = parseInt(ranges.var1Range.value) * 2; // Adjust multiplier as needed
+      const strength = parseInt(ranges.var1Range.value); // 0 ~ 10
+      if (strength === 0) return; // 효과 없음
+    
+      const maxShift = strength * 2; // 값이 클수록 shift 범위 증가
+    
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const index = (y * width + x) * 4;
-          const shift = Math.round(Math.random() * shiftAmount);
-
-          const rIndex = ((y * width + ((x + shift) % width)) * 4);
-          const gIndex = ((y * width + ((x - shift + width) % width)) * 4);
-
-          data[index] = data[rIndex] || 0;     // R
-          data[index + 1] = data[gIndex + 1] || 0; // G
-          // B remains the same
+          const shift = Math.floor((Math.random() - 0.5) * maxShift); // 양수 또는 음수 shift
+    
+          const rX = Math.min(width - 1, Math.max(0, x + shift));
+          const gX = Math.min(width - 1, Math.max(0, x - shift));
+          const rIndex = (y * width + rX) * 4;
+          const gIndex = (y * width + gX) * 4;
+    
+          // Red와 Green만 shift 하고 Blue는 그대로 둔다
+          data[index]     = data[rIndex];     // Red
+          data[index + 1] = data[gIndex + 1]; // Green
         }
       }
     }
     /* #endregion */
-
+   
     /* #endregion */
 
   /* #endregion */
