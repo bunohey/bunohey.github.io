@@ -83,7 +83,9 @@ function loadImage(src) {
     currentImageData = tempCtx.getImageData(0, 0, imgWidth, imgHeight);
   };
   imageObj.src = src;
-} /* #endregion */
+} 
+
+/* #endregion */
 
 /* #region Import Button */
 function handleFileUpload(event) {
@@ -113,48 +115,36 @@ function exportImage() {
   
   function applyGlitchEffect() {
     if (!imageNode || !currentImageData) return;
-
+  
     const width = stage.width();
     const height = stage.height();
-
+  
     const glitchCanvas = document.createElement('canvas');
     const ctx = glitchCanvas.getContext('2d');
     glitchCanvas.width = width;
     glitchCanvas.height = height;
-
-    // Draw the current Konva image onto the glitch canvas
+  
+    // Draw original image onto canvas
     ctx.drawImage(imageNode.image(), 0, 0, width, height);
-
-    // Get ImageData from the glitch canvas
     const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
-
-    
-    // Apply effects if slider values have changed
-    const effects = [
-      applyRgbShift,
-      applySaturation,
-      applyNoise,
-      applyScramble,
-      applySorting,
-      applyChromaticAberration,
-      applyPixelation,
-      applyBitDepthReduction,
-      applyScanLine,
-      applyBlur
-    ];
-    
-    // Iterate over the sliders (1 to 10)
-    for (let i = 1; i <= 10; i++) {
-      const sliderValue = ranges[`var${i}Range`].value;
-      const effectKey = Object.keys(previousStrength)[i - 1]; // previousStrength keys (rgbShift, saturation, etc.)
-    
-      if (previousStrength[effectKey] !== sliderValue) {
-        effects[i - 1](data, width, height); // Apply the corresponding effect
-        previousStrength[effectKey] = sliderValue; // Update previous strength for that effect
-      }
-    }
   
+    // Apply all effects with current slider values
+    applyRgbShift(data, width, height);
+    applySaturation(data, width, height);
+    applyNoise(data, width, height);
+    applyScramble(data, width, height);
+    applySorting(data, width, height);
+    applyChromaticAberration(data, width, height);
+    applyPixelation(data, width, height);
+    applyBitDepthReduction(data, width, height);
+    applyScanLine(data, width, height);
+    applyBlur(data, width, height);
+  
+    ctx.putImageData(imageData, 0, 0);
+    renderFinalImage(glitchCanvas);
+  }
+
     // Apply effects
     applyRgbShift(data, width, height);
     function applySaturation(data, width, height) {
@@ -192,13 +182,6 @@ function exportImage() {
     function applyBlur(data, width, height) {
       // 아직 구현 안 함. 에러 방지용 빈 함수
     }
-
-    // Put the modified image data back to the glitch canvas
-    ctx.putImageData(imageData, 0, 0);
-
-    // Final image update
-    renderFinalImage(glitchCanvas);
-  }
 /* #endregion */
 
   /* #region Glitch effects */
@@ -206,23 +189,23 @@ function exportImage() {
     /* #region RGB SHIFT */
     function applyRgbShift(data, width, height) {
       const strength = parseInt(ranges.var1Range.value); // 0 ~ 10
-      if (strength === 0) return; // 효과 없음
+      if (strength === 0) return; // 0이면 효과 없음
     
-      const maxShift = strength * 2; // 값이 클수록 shift 범위 증가
+      const maxShift = strength * 500;
     
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const index = (y * width + x) * 4;
-          const shift = Math.floor((Math.random() - 0.5) * maxShift); // 양수 또는 음수 shift
+          const shift = Math.floor((Math.random() - 0.5) * maxShift);
     
           const rX = Math.min(width - 1, Math.max(0, x + shift));
           const gX = Math.min(width - 1, Math.max(0, x - shift));
           const rIndex = (y * width + rX) * 4;
           const gIndex = (y * width + gX) * 4;
     
-          // Red와 Green만 shift 하고 Blue는 그대로 둔다
-          data[index]     = data[rIndex];     // Red
-          data[index + 1] = data[gIndex + 1]; // Green
+          data[index]     = data[rIndex];       // Red
+          data[index + 1] = data[gIndex + 1];   // Green
+          // Blue는 그대로
         }
       }
     }
