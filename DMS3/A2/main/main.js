@@ -3,17 +3,20 @@ let stage, layer, imageNode;
 const ranges = {};
 let currentImageData; // Store the original image data
 
+const maxWidth = 600;
+const maxHeight = 800;
+
 // Konva stage and layer setup //
 window.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('container');
-  const maxWidth = window.innerWidth
-  const maxHeight = window.innerHeight
 
+  // 고정된 크기 적용
   stage = new Konva.Stage({
-    container: container, // Use the div with id 'container'
+    container: container,
     width: maxWidth,
     height: maxHeight,
   });
+
   layer = new Konva.Layer();
   stage.add(layer);
 
@@ -33,34 +36,36 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Load image into Konva canvas //
+/* #region Load image into Konva canvas */
 function loadImage(src) {
   const imageObj = new Image();
+  imageObj.crossOrigin = "anonymous";
   imageObj.onload = () => {
     const imgWidth = imageObj.width;
     const imgHeight = imageObj.height;
-    const container = stage.container();
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
+
+    const containerWidth = stage.width();
+    const containerHeight = stage.height();
 
     const aspectRatio = imgWidth / imgHeight;
-    let canvasWidth = containerWidth;
-    let canvasHeight = containerHeight;
-
-    if (imgWidth > canvasWidth || imgHeight > canvasHeight) {
-      if (canvasWidth / aspectRatio <= containerHeight) {
-        canvasHeight = canvasWidth / aspectRatio;
-      } else {
-        canvasWidth = containerHeight * aspectRatio;
-      }
+    const imgAspectRatio = imgWidth / imgHeight;
+    const canvasAspectRatio = containerWidth / containerHeight;
+    
+    let canvasWidth, canvasHeight;
+    
+    // 이미지의 종횡비에 따라 최대한 크게 (안 잘리게) 리사이즈
+    if (imgAspectRatio > canvasAspectRatio) {
+      // 이미지가 더 넓음 → 너비를 최대한 채우고, 높이를 비율에 맞춤
+      canvasWidth = containerWidth;
+      canvasHeight = canvasWidth / imgAspectRatio;
+    } else {
+      // 이미지가 더 높음 → 높이를 최대한 채우고, 너비를 비율에 맞춤
+      canvasHeight = containerHeight;
+      canvasWidth = canvasHeight * imgAspectRatio;
     }
 
-    stage.width(canvasWidth);
-    stage.height(canvasHeight);
-
-    if (imageNode) {
-      imageNode.destroy();
-    }
+    // 이미지 크기를 고정 크기에 맞게 설정
+    if (imageNode) imageNode.destroy();
 
     imageNode = new Konva.Image({
       image: imageObj,
@@ -74,17 +79,19 @@ function loadImage(src) {
     layer.add(imageNode);
     layer.draw();
 
-    // Store the initial image data
+    // Store the image as pixel data for effects
     const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvasWidth;
+    tempCanvas.height = canvasHeight;
     const tempCtx = tempCanvas.getContext('2d');
-    tempCanvas.width = imgWidth;
-    tempCanvas.height = imgHeight;
-    tempCtx.drawImage(imageObj, 0, 0);
-    currentImageData = tempCtx.getImageData(0, 0, imgWidth, imgHeight);
+    tempCtx.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
+    currentImageData = tempCtx.getImageData(0, 0, canvasWidth, canvasHeight);
+
+    // Apply the glitch effect now that the image is fully loaded and available
+    applyGlitchEffect();
   };
   imageObj.src = src;
-} 
-
+}
 /* #endregion */
 
 /* #region Import Button */
@@ -93,10 +100,28 @@ function handleFileUpload(event) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = (e) => {
+    resetEffects();
     loadImage(e.target.result);
   };
   reader.readAsDataURL(file);
-} /* #endregion */
+}
+
+function resetEffects() {
+  for (let i = 1; i <= 10; i++) {
+    const id = `var${i}Range`;
+    const input = document.getElementById(id);
+    input.value = 0; 
+  }
+
+  if (imageNode) {
+    imageNode.cache();
+    imageNode.filters([]);
+    layer.batchDraw();
+  }
+
+  currentImageData = null;
+}
+/* #endregion */
 
 /* #region Export Button */
 function exportImage() {
@@ -109,123 +134,97 @@ function exportImage() {
 /* #endregion */
 
 /* #region Control Panel */
-
-  /* #region Apply Progress */
-  let previousStrength = {};
-  
+  /* #Apply Glitch Effect */
   function applyGlitchEffect() {
     if (!imageNode || !currentImageData) return;
   
     const width = stage.width();
     const height = stage.height();
-  
     const glitchCanvas = document.createElement('canvas');
-    const ctx = glitchCanvas.getContext('2d');
     glitchCanvas.width = width;
     glitchCanvas.height = height;
+    const ctx = glitchCanvas.getContext('2d');
+    ctx.putImageData(currentImageData, 0, 0);
   
-    // Draw original image onto canvas
-    ctx.drawImage(imageNode.image(), 0, 0, width, height);
-    const imageData = ctx.getImageData(0, 0, width, height);
+    let imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
   
-    // Apply all effects with current slider values
-    applyRgbShift(data, width, height);
-    applySaturation(data, width, height);
-    applyNoise(data, width, height);
-    applyScramble(data, width, height);
-    applySorting(data, width, height);
-    applyChromaticAberration(data, width, height);
-    applyPixelation(data, width, height);
-    applyBitDepthReduction(data, width, height);
-    applyScanLine(data, width, height);
-    applyBlur(data, width, height);
+    // Apply effects based on the slider values
+    if (parseInt(ranges.var1Range.value) > 0) {
+      applyRgbShift(data, width, height);
+    }
+    if (parseInt(ranges.var2Range.value) > 0) {
+      applySaturation(data, width, height);
+    }
+  
+    // Apply other effects here as needed
   
     ctx.putImageData(imageData, 0, 0);
     renderFinalImage(glitchCanvas);
   }
+  /* #endregion */
 
-    // Apply effects
-    applyRgbShift(data, width, height);
-    function applySaturation(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
+/* #region RGB SHIFT */
+function applyRgbShift(data, width, height) {
+  const strength = parseInt(ranges.var1Range.value);
+  const effectStrength = strength / 10;
+  if (effectStrength === 0) return;
+
+  const maxOffset = 50; // 강도는 유지, 퍼포먼스 고려하여 적정치
+  const shiftedData = new Uint8ClampedArray(data); // 원본 복사
+
+  for (let y = 0; y < height; y++) {
+    const rOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+    const gOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+    const bOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+
+    for (let x = 0; x < width; x++) {
+      const index = (y * width + x) * 4;
+
+      const rX = Math.min(width - 1, Math.max(0, x + rOffset));
+      const gX = Math.min(width - 1, Math.max(0, x + gOffset));
+      const bX = Math.min(width - 1, Math.max(0, x + bOffset));
+
+      const rIndex = (y * width + rX) * 4;
+      const gIndex = (y * width + gX) * 4;
+      const bIndex = (y * width + bX) * 4;
+
+      data[index]     = shiftedData[rIndex];       // R
+      data[index + 1] = shiftedData[gIndex + 1];   // G
+      data[index + 2] = shiftedData[bIndex + 2];   // B
     }
-    
-    function applyNoise(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyScramble(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applySorting(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyChromaticAberration(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyPixelation(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyBitDepthReduction(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyScanLine(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
-    
-    function applyBlur(data, width, height) {
-      // 아직 구현 안 함. 에러 방지용 빈 함수
-    }
+  }
+}
 /* #endregion */
 
-  /* #region Glitch effects */
+/* #region SATURATION */
+function applySaturation(data, width, height) {
+  const strength = parseInt(ranges.var2Range.value);
+  const effectStrength = strength / 10;
+  if (effectStrength === 0) return;
 
-    /* #region RGB SHIFT */
-    function applyRgbShift(data, width, height) {
-      const strength = parseInt(ranges.var1Range.value); // 0 ~ 10
-      if (strength === 0) return; // 0이면 효과 없음
-    
-      const maxShift = strength * 500;
-    
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          const index = (y * width + x) * 4;
-          const shift = Math.floor((Math.random() - 0.5) * maxShift);
-    
-          const rX = Math.min(width - 1, Math.max(0, x + shift));
-          const gX = Math.min(width - 1, Math.max(0, x - shift));
-          const rIndex = (y * width + rX) * 4;
-          const gIndex = (y * width + gX) * 4;
-    
-          data[index]     = data[rIndex];       // Red
-          data[index + 1] = data[gIndex + 1];   // Green
-          // Blue는 그대로
-        }
-      }
-    }
-    /* #endregion */
-   
-    /* #endregion */
+  const factor = effectStrength * 10;
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const gray = 0.3 * r + 0.59 * g + 0.11 * b;
 
-  /* #endregion */
-
-  /* #region Final Render */
-  function renderFinalImage(glitchCanvas) {
-    const newImg = new Image();
-    newImg.onload = () => {
-      imageNode.image(newImg);
-      layer.batchDraw();
-    };
-    newImg.src = glitchCanvas.toDataURL();
+    data[i]     = Math.min(255, Math.max(0, gray + (r - gray) * factor));
+    data[i + 1] = Math.min(255, Math.max(0, gray + (g - gray) * factor));
+    data[i + 2] = Math.min(255, Math.max(0, gray + (b - gray) * factor));
   }
-  /* #endregion */
+}
+/* #endregion */
 
+/* #region Final Render */
+function renderFinalImage(glitchCanvas) {
+  const newImg = new Image();
+  newImg.onload = () => {
+    // Once the glitch image is generated, update the Konva imageNode with the new image
+    imageNode.image(newImg);
+    layer.batchDraw();
+  };
+  newImg.src = glitchCanvas.toDataURL();
+}
 /* #endregion */
 
 /* #region Audio Toggle button */
@@ -233,9 +232,7 @@ const bgMusic = document.getElementById('bgmusic');
 const muteToggle = document.getElementById('mute-toggle');
 
 muteToggle.addEventListener('click', () => {
-  // Toggle mute state
   bgMusic.muted = !bgMusic.muted;
-
-  // Change button image based on mute state
   muteToggle.src = bgMusic.muted ? 'mute.png' : 'play.png';
-}); /* #endregion */
+});
+/* #endregion */
