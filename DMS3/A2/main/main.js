@@ -145,6 +145,18 @@ function applyGlitchEffect() {
   const imageData = ctx.getImageData(0, 0, width, height);
   const data = imageData.data;
 
+  // Apply effects based on slider values //
+  if (parseInt(ranges.var1Range.value) > 0) applyRgbShift(data, width, height);
+  if (parseInt(ranges.var2Range.value) > 0) applySaturation(data, width, height);
+  if (parseInt(ranges.var3Range.value) > 0) applyNoise(data, width, height);
+  if (parseInt(ranges.var4Range.value) > 0) applyScramble(data, width, height);
+  if (parseInt(ranges.var5Range.value) > 0) applySorting(data, width, height);
+  if (parseInt(ranges.var6Range.value) > 0) applyChromaticAberration(data, width, height);
+  if (parseInt(ranges.var7Range.value) > 0) applyPixelation(data, width, height);
+  if (parseInt(ranges.var8Range.value) > 0) applyBitDepthReduction(data, width, height);
+  if (parseInt(ranges.var9Range.value) > 0) applyScanLine(data, width, height);
+  if (parseInt(ranges.var10Range.value) > 0) applyBlur(data, width, height);
+  
   ctx.putImageData(imageData, 0, 0);
   renderFinalImage(glitchCanvas);
 }
@@ -429,6 +441,8 @@ function applyPixelation(data, width, height) {
     }
   }
   /* #endregion */
+
+/* #endregion */
 
 /* #region Final Render */
 function renderFinalImage(glitchCanvas) {
