@@ -49,17 +49,17 @@ footer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 79vw;
+  width: 80vw;
   height: auto;
   gap: 2vw;
   z-index: 1;
 }
 
 .controlpanel {
-  position: absolute;
+  position: relative;
   display: block;
   right: 0vw;
-  width: 40vw;
+  width: 58vw;
   height: 70vh;
   z-index: 1;
   padding: 2.5rem;
@@ -70,10 +70,14 @@ footer {
 }
 
 #container {
-  position: absolute;
-  display: block;
+  position: relative;
+  display: flex;
+  width: 50vw;
+  height: 70vh;
+  max-width: 100%;
+  max-height: 100%;
   left: 0vw;
-  z-index: 555;
+  z-index: 222;
 }
 /* #endregion */
 
