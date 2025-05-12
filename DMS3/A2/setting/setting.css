@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=Rubik+80s+Fade&family=Rubik+Broken+Fax&family=Rubik+Glitch&family=Rubik+Iso&family=Rubik+Vinyl&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Rubik+Broken+Fax&family=Rubik+Iso&family=VT323&display=swap');
 
 body {
   background-color: rgb(0, 0, 0);
@@ -6,7 +6,7 @@ body {
 
 }
 
-button, .underbar label, .button label, input[type=range]:hover {
+#mute-toggle, .underbar label, .button label, input[type=range]:hover {
   cursor: url("cursor2.png"), auto; /* img by CustomCursor */
 }
 

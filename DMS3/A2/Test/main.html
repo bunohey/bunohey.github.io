@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+
+    <link rel="stylesheet" href="../setting/setting.css">
+    <link rel="stylesheet" href="main.css">
+
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+  
+  <div class="main-panel">
+    <div id="container"></div> <!--PREVIEW--> 
+
+    <div class="controlpanel"> <!--CONTROL PANEL-->
+      <div class="rangeBox">
+        <h2>RGB SHIFT</h2>
+        <input type="range" id="var1Range" min="0" max="10" step="1" value="0">
+      </div>
+      
+      <div class="underbar"> <!--REDO/UNDO-->
+        <label for="undo">undo</label>
+        <label for="reset" style="color: rgb(251, 50, 50);">reset</label>
+        <label for="random" style="color: rgb(0, 228, 167);">random</label>
+        <label for="redo">redo</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="button">
+    <label for="input-file">ㅤimportㅤ</label>
+    <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+    <label for="export-file" id="export-label">ㅤexportㅤ</label>
+  </div>
+  
+</body>
+
+</html>

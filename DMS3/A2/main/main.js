@@ -1,24 +1,16 @@
 /* #region Global Setting */
-const sliders = [
-  document.getElementById('var1Range'),
-  document.getElementById('var2Range'),
-  document.getElementById('var3Range'),
-  document.getElementById('var4Range'),
-  document.getElementById('var5Range'),
-  document.getElementById('var6Range'),
-  document.getElementById('var7Range'),
-  document.getElementById('var8Range'),
-  document.getElementById('var9Range'),
-  document.getElementById('var10Range')
-];
+const sliderIds = Array.from({ length: 10 }, (_, i) => `var${i + 1}Range`);
+const sliders = sliderIds.map(id => document.getElementById(id));
+const ranges = sliderIds.reduce((acc, id) => ({ ...acc, [id]: document.getElementById(id) }), {});
 
-let stage, layer, imageNode;
-const ranges = {};
-let currentImageData;
+let lastValues = Array(sliders.length).fill(-1);
+let stage, layer, imageNode, currentImageData;
 
 // Konva stage and layer setup //
 window.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('container');
+
+  // Konva stage and layer //
   stage = new Konva.Stage({ container, width: container.clientWidth, height: container.clientHeight });
   layer = new Konva.Layer();
   stage.add(layer);
@@ -26,8 +18,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // Slider event listeners //
   sliders.forEach(slider => {
     ranges[slider.id] = slider;
-    slider.addEventListener('input', debounce(applyGlitchEffect, 50));
+    slider.addEventListener('input', () => {
+      applyGlitchEffect();
   });
+});
 
   // File Upload event listener //
   document.getElementById('input-file').addEventListener('change', handleFileUpload);
@@ -39,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // Default image load //
-  loadImage('medusa.jpeg');
+  loadImage('Woman.jpg'); // img by AdobeStock //
 });
 
 // Fit image to stage, maintain aspect ratio //
@@ -52,7 +46,7 @@ function fitImageToStage() {
   imageNode.size({ width: newW, height: newH });
   imageNode.position({ x: (cw - newW) / 2, y: (ch - newH) / 2 });
   layer.batchDraw();
-}
+};
 
 // Load image and cache original data //
 function loadImage(src) {
@@ -74,111 +68,71 @@ function loadImage(src) {
     tempCtx.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height, 0, 0, tempCanvas.width, tempCanvas.height);
     currentImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 
+    resetSliders();
     applyGlitchEffect();
   };
   imageObj.src = src;
-}
+};
 /* #endregion */
 
-/* #region Import & Export Button */
-// Import btn //
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const name = file.name.replace(/\.[^/.]+$/, "");
-  originalFileName = `${name}-glitched.png`;
-  const reader = new FileReader();
-  reader.onload = e => {
-    loadImage(e.target.result);
-    resetSliders(); // reset sliders when new image is loaded //
-  };
-  reader.readAsDataURL(file);
-}
-
-// Export btn //
-let originalFileName = 'glitched-image.png';
-
-function exportImage() {
-  const link = document.createElement('a');
-  link.href = stage.toDataURL();
-  link.download = originalFileName;
-  link.click();
-}
-/* #endregion */
-
-/* #region Reset & Random Button */
-// Reset btn //
-document.querySelector('label[for="reset"]').addEventListener('click', resetSliders);
-function resetSliders() {
-  sliders.forEach(slider => {
-    slider.value = 0;
-    slider.dispatchEvent(new Event('input'));
-  });
-  applyGlitchEffect();
-}
-
-// Random btn //
-document.querySelector('label[for="random"]').addEventListener('click', randomizeSliders);
-function randomizeSliders() {
-  sliders.forEach(slider => {
-    slider.value = Math.floor(Math.random() * 8);
-    slider.dispatchEvent(new Event('input'));
-  });
-  applyGlitchEffect();
-}
-/* #endregion */
-
-/* #region Apply Glitch Effect Progress */
-function applyGlitchEffect() {
+/* #region Apply Effect Progress */
+function applyGlitchEffect(force = false) {
   if (!imageNode) return;
 
-  // Provide effect on cached image data //
-  imageNode.cache();
-  const width = stage.width();
-  const height = stage.height();
+  const currentValues = sliders.map(s => +s.value);
+
+  // Skip if no changes
+  if (!force && currentValues.every((v, i) => v === lastValues[i])) return;
+
+  lastValues = [...currentValues];
+
+  // Use cached image data
+  const cachedData = currentImageData;
+  const width  = imageNode.width();
+  const height = imageNode.height();
+
+  // Create a new canvas for glitch effect
   const glitchCanvas = document.createElement('canvas');
   glitchCanvas.width = width;
   glitchCanvas.height = height;
   const ctx = glitchCanvas.getContext('2d');
-  ctx.putImageData(currentImageData, 0, 0);
+  ctx.putImageData(cachedData, 0, 0);
 
   const imageData = ctx.getImageData(0, 0, width, height);
   const data = imageData.data;
 
   // Apply effects based on slider values //
-  if (parseInt(ranges.var1Range.value) > 0) applyRgbShift(data, width, height);
-  if (parseInt(ranges.var2Range.value) > 0) applySaturation(data, width, height);
-  if (parseInt(ranges.var3Range.value) > 0) applyNoise(data, width, height);
-  if (parseInt(ranges.var4Range.value) > 0) applyScramble(data, width, height);
-  if (parseInt(ranges.var5Range.value) > 0) applySorting(data, width, height);
-  if (parseInt(ranges.var6Range.value) > 0) applyChromaticAberration(data, width, height);
-  if (parseInt(ranges.var7Range.value) > 0) applyPixelation(data, width, height);
-  if (parseInt(ranges.var8Range.value) > 0) applyBitDepthReduction(data, width, height);
-  if (parseInt(ranges.var9Range.value) > 0) applyScanLine(data, width, height);
-  if (parseInt(ranges.var10Range.value) > 0) applyBlur(data, width, height);
-  
-  ctx.putImageData(imageData, 0, 0);
-  renderFinalImage(glitchCanvas);
-}
+  const applyEffect = (range, effect) =>
+    parseInt(range.value) > 0 && effect(data, width, height);
 
-// Debounce function to limit the rate of function calls //
-function debounce(func, wait) {
-  let timeout;
-  return function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(), wait);
-  };
+  applyEffect(ranges.var1Range, applyRgbShift);
+  applyEffect(ranges.var2Range, applySaturation);
+  applyEffect(ranges.var3Range, applyNoise);
+  applyEffect(ranges.var4Range, applyScramble);
+  applyEffect(ranges.var5Range, applySorting);
+  applyEffect(ranges.var6Range, applyChromaticAberration);
+  applyEffect(ranges.var7Range, applyPixelation);
+  applyEffect(ranges.var8Range, applyBitDepthReduction);
+  applyEffect(ranges.var9Range, applyScanLine);
+  applyEffect(ranges.var10Range, applyBlur);
+
+  // Apply the final image data //
+  ctx.putImageData(imageData, 0, 0);
+
+  renderFinalImage(glitchCanvas);
+  layer.batchDraw();
 }
 /* #endregion */
 
+/* #region Glitch Effects */
   /* #region RGB SHIFT */
   function applyRgbShift(data, width, height) {
     const strength = parseInt(ranges.var1Range.value);
     const effectStrength = strength / 10;
     if (effectStrength === 0) return;
 
-    const maxOffset = 50; // 강도는 유지, 퍼포먼스 고려하여 적정치
-    const shiftedData = new Uint8ClampedArray(data); // 원본 복사
+    const maxOffset = 50;
+    const shiftedData = new Uint8ClampedArray(data);
 
     for (let y = 0; y < height; y++) {
       const rOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
@@ -201,7 +155,7 @@ function debounce(func, wait) {
         data[index + 2] = shiftedData[bIndex + 2];   // B
       }
     }
-  }
+  };
   /* #endregion */
 
   /* #region SATURATION */
@@ -210,7 +164,7 @@ function debounce(func, wait) {
     const effectStrength = strength / 10;
     if (effectStrength === 0) return;
 
-    const factor = effectStrength * 10;
+    const factor = effectStrength * 15;
     for (let i = 0; i < data.length; i += 4) {
       const r = data[i], g = data[i + 1], b = data[i + 2];
       const gray = 0.3 * r + 0.59 * g + 0.11 * b;
@@ -219,7 +173,7 @@ function debounce(func, wait) {
       data[i + 1] = Math.min(255, Math.max(0, gray + (g - gray) * factor));
       data[i + 2] = Math.min(255, Math.max(0, gray + (b - gray) * factor));
     }
-  }
+  };
   /* #endregion */
 
   /* #region NOISE */
@@ -228,7 +182,7 @@ function applyNoise(data, width, height) {
   const effectStrength = strength / 10;
   if (effectStrength === 0) return;
 
-  const noiseAmount = effectStrength * 2000; // 최대 픽셀 수 조절
+  const noiseAmount = effectStrength * 2000; //
 
   for (let i = 0; i < noiseAmount * width; i++) {
     const x = Math.floor(Math.random() * width);
@@ -241,17 +195,17 @@ function applyNoise(data, width, height) {
     data[index + 1] = Math.max(0, Math.min(255, data[index + 1] + noise)); // G
     data[index + 2] = Math.max(0, Math.min(255, data[index + 2] + noise)); // B
   }
-}
+};
 /* #endregion */
 
   /* #region SCRAMBLE */
   function applyScramble(data, width, height) {
-    const strength = parseInt(ranges.var4Range.value); // var4Range에 연결
+    const strength = parseInt(ranges.var4Range.value);
     const effectStrength = strength / 10;
     if (effectStrength === 0) return;
 
-    const blockSize = Math.floor(10 + effectStrength * 30); // 블럭 크기
-    const numBlocks = Math.floor(effectStrength * 500);     // 섞을 블럭 수
+    const blockSize = Math.floor(10 + effectStrength * 30); 
+    const numBlocks = Math.floor(effectStrength * 500);
 
     for (let i = 0; i < numBlocks; i++) {
       const x1 = Math.floor(Math.random() * (width - blockSize));
@@ -272,7 +226,7 @@ function applyNoise(data, width, height) {
         }
       }
     }
-  }
+  };
 /* #endregion */
 
   /* #region SORTING */
@@ -303,7 +257,7 @@ function applySorting(data, width, height) {
       data[idx + 3] = line[x][3];
     }
   }
-}
+};
 /* #endregion */
 
   /* #region CHROMATIC ABERRATION */
@@ -328,7 +282,7 @@ function applyChromaticAberration(data, width, height) {
       data[idx + 2] = original[bIdx + 2]; // B
     }
   }
-}
+};
 /* #endregion */
 
   /* #region PIXELATION */
@@ -361,19 +315,17 @@ function applyPixelation(data, width, height) {
       }
     }
   }
-}
+};
 /* #endregion */
 
   /* #region BIT DEPTH REDUCTION */
   function applyBitDepthReduction(data, width, height) {
-    const strength = parseInt(ranges.var8Range.value); // 0~10
+    const strength = parseInt(ranges.var8Range.value);
     const effectStrength = strength / 10;
     if (effectStrength === 0) return;
-  
-    // 10단계 → 최대 10단계 유지, 단 '단계당 폭'은 커지게
+
     const baseLevels = 10;
-    // 감각적으로 더 드라마틱하게 보이도록, nonlinear scaling
-    const exaggeration = Math.pow(effectStrength, 2.5); // 비선형 곡선
+    const exaggeration = Math.pow(effectStrength, 2.5);
   
     // 단계 수는 유지하되, step을 비정상적으로 크게
     const step = 355 / (baseLevels - exaggeration * 8); 
@@ -384,13 +336,13 @@ function applyPixelation(data, width, height) {
       data[i + 1] = Math.round(data[i + 1] / clampedStep) * clampedStep;
       data[i + 2] = Math.round(data[i + 2] / clampedStep) * clampedStep;
     }
-  }
+  };
   /* #endregion */
 
   /* #region SCAN LINE */
   function applyScanLine(data, width, height) {
     const strength = parseInt(ranges.var9Range.value);
-    const lineGap = 2 + Math.floor(10 - strength); // 강도 높을수록 줄 간격 좁음
+    const lineGap = 2 + Math.floor(10 - strength);
     const darkness = strength * 20;
   
     for (let y = 0; y < height; y++) {
@@ -403,7 +355,7 @@ function applyPixelation(data, width, height) {
         }
       }
     }
-  }
+  };
   /* #endregion */
 
   /* #region BLUR */
@@ -412,24 +364,26 @@ function applyPixelation(data, width, height) {
     const effectStrength = strength / 10;
     if (effectStrength === 0) return;
   
-    const radius = Math.floor(1 + effectStrength * 6); // radius 최대 6까지 확장
+    const radius = Math.floor(1 + effectStrength * 5);
     const kernelSize = radius * 2 + 1;
     const temp = new Uint8ClampedArray(data);
-  
-    for (let y = radius; y < height - radius; y++) {
-      for (let x = radius; x < width - radius; x++) {
+    
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
         let r = 0, g = 0, b = 0, count = 0;
   
         for (let dy = -radius; dy <= radius; dy++) {
           for (let dx = -radius; dx <= radius; dx++) {
             const nx = x + dx;
             const ny = y + dy;
-            const index = (ny * width + nx) * 4;
   
-            r += temp[index];
-            g += temp[index + 1];
-            b += temp[index + 2];
-            count++;
+            if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+              const index = (ny * width + nx) * 4;
+              r += temp[index];
+              g += temp[index + 1];
+              b += temp[index + 2];
+              count++;
+            }
           }
         }
   
@@ -441,7 +395,6 @@ function applyPixelation(data, width, height) {
     }
   }
   /* #endregion */
-
 /* #endregion */
 
 /* #region Final Render */
@@ -450,16 +403,62 @@ function renderFinalImage(glitchCanvas) {
   newImg.onload = () => {
     const canvasWidth = imageNode.width(); 
     const canvasHeight = imageNode.height();
-  
-    imageNode.image(newImg);
-    imageNode.width(canvasWidth);   // 이미지가 바뀌어도 사이즈 유지
+
+    imageNode.image(newImg);  // Adjust the image
+    imageNode.width(canvasWidth);
     imageNode.height(canvasHeight);
-  
+
     imageNode.x((stage.width() - canvasWidth) / 2);
     imageNode.y((stage.height() - canvasHeight) / 2);
-    layer.batchDraw();
+
+    imageNode.getLayer().draw();  // Redraw the layer
   };
   newImg.src = glitchCanvas.toDataURL();
+}
+/* #endregion */
+
+/* #region Import & Export Button */
+// Import btn //
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const name = file.name.replace(/\.[^/.]+$/, "");
+  originalFileName = `${name}-glitched.png`;
+  const reader = new FileReader();
+  reader.onload = e => {
+    loadImage(e.target.result);
+    resetSliders(); // reset sliders when new image is loaded //
+  };
+  reader.readAsDataURL(file);
+};
+
+// Export btn //
+let originalFileName = 'glitched-image.png';
+document.getElementById('export-label').addEventListener('click', exportImage);
+function exportImage() {
+  const canvas = layer.toCanvas();
+  const dataURL = canvas.toDataURL();
+
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = originalFileName;
+  link.click();
+};
+/* #endregion */
+
+/* #region Reset & Random Button */
+// Reset btn //
+document.querySelector('label[for="reset"]').addEventListener('click', resetSliders);
+function resetSliders() {
+    sliders.forEach(slider => slider.value = 0);
+    applyGlitchEffect();
+  }
+
+// Random btn //
+document.querySelector('label[for="random"]').addEventListener('click', randomizeSliders);
+function randomizeSliders() {
+  sliders.forEach(slider => slider.value = Math.floor(Math.random() * 5));
+  applyGlitchEffect();
 }
 /* #endregion */
 

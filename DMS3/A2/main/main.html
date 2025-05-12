@@ -9,27 +9,25 @@
     <link rel="stylesheet" href="../setting/setting.css">
     <link rel="stylesheet" href="main.css">
    
-    <script src="http://unpkg.com/tone"></script>
     <script src="https://unpkg.com/konva@9/konva.min.js"></script>
     <script src="main.js" defer></script>
 </head>
 
 <body>
   <audio autoplay>
-    <source src="wwelcome.wav" type="audio/wav">
   </audio> <!-- mp3 by FreeSound -->
   <audio id="bgmusic" autoplay loop>
     <source src="backgroundmusic.mp3" type="audio/mp3">
   </audio> <!-- mp3 by FreeSound -->
-      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; cursor: pointer; position: absolute; top: 2rem; right: 2rem; z-index: 10;"> <!-- img by AdobeStock -->
+      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 10;"> <!-- img by AdobeStock -->
       
   <header>
     <h1>glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch<h1>
   </header>
   
   <div class="main-panel">
-    <div class="preview" id="container">  <!--PREVIEW-->
-    </div>
+    <div id="container"></div> <!--PREVIEW--> 
+
     <div class="controlpanel"> <!--CONTROL PANEL-->
       <div class="rangeBox">
         <h2>RGB SHIFT</h2>

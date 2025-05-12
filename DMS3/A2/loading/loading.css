@@ -17,9 +17,9 @@ h1 {
 } 
 
 h2 {
-  font-family: "Jacquard 12", system-ui;
-  font-size: 1.5rem;
-  font-weight: 1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1rem;
+  font-weight: 400;
   margin: 1rem;
   color: #000000;
 } /* #endregion */
@@ -100,7 +100,7 @@ h2 {
   transform: translate(-50%, -50%);
   text-align: center;
   display: none;
-  width: 50vw;
+  width: 40vw;
   box-sizing: border-box;
   box-shadow: 2rem 2rem 2rem #00000085;
 }
@@ -116,7 +116,6 @@ h2 {
   display: block;
   height: 40%;
   width: 30%;
-  cursor: pointer;
 }
 
 #confirmBtn:hover {
