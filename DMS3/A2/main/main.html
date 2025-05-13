@@ -10,16 +10,13 @@
     <link rel="stylesheet" href="main.css">
    
     <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script src="http://unpkg.com/tone"></script>
     <script src="main.js" defer></script>
 </head>
 
 <body>
-  <audio autoplay>
-  </audio> <!-- mp3 by FreeSound -->
-  <audio id="bgmusic" autoplay loop>
-    <source src="backgroundmusic.mp3" type="audio/mp3">
-  </audio> <!-- mp3 by FreeSound -->
-      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 10;"> <!-- img by AdobeStock -->
+  <audio id="bgmusic" src="backgroundmusic.mp3" loop></audio> <!-- mp3 by FreeSound -->
+      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 10;" /> <!-- img by AdobeStock -->
       
   <header>
     <h1>glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch<h1>
@@ -29,69 +26,74 @@
     <div id="container"></div> <!--PREVIEW--> 
 
     <div class="controlpanel"> <!--CONTROL PANEL-->
-      <div class="rangeBox">
-        <h2>RGB SHIFT</h2>
-        <input type="range" id="var1Range" min="0" max="10" step="1" value="0">
+        
+      <div class="topbar"> <!--TOP BAR-->
+        <label for="input-file">import</label>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+        <label for="export-file" id="export-label">export</label>
       </div>
-      <div class="rangeBox">
-        <h2>SATURATION</h2>
-        <input type="range" id="var2Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>NOISE</h2>
-        <input type="range" id="var3Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>SCRAMBLE</h2>
-        <input type="range" id="var4Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>SORTING</h2>
-        <input type="range" id="var5Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>CHROMATIC ABERRATION</h2>
-        <input type="range" id="var6Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>PIXELATION</h2>
-        <input type="range" id="var7Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>BIT DEPTH REDUCTION</h2>
-        <input type="range" id="var8Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>SCAN LINE</h2>
-        <input type="range" id="var9Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="rangeBox">
-        <h2>BLUR</h2>
-        <input type="range" id="var10Range" min="0" max="10" step="1" value="0">
-      </div>
-      <div class="underbar"> <!--REDO/UNDO-->
-        <label for="undo">undo</label>
-        <label for="reset" style="color: rgb(251, 50, 50);">reset</label>
-        <label for="random" style="color: rgb(0, 228, 167);">random</label>
-        <label for="redo">redo</label>
+
+      <div class="effectsmixer"> <!--EFFECTS MIXER-->
+        <div class="rangeBox">
+          <h2>RGB SHIFT</h2>
+          <input type="range" id="var1Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>SATURATION</h2>
+          <input type="range" id="var2Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>NOISE</h2>
+          <input type="range" id="var3Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>SCRAMBLE</h2>
+          <input type="range" id="var4Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>SORTING</h2>
+          <input type="range" id="var5Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>CHROMATIC ABERRATION</h2>
+          <input type="range" id="var6Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>PIXELATION</h2>
+          <input type="range" id="var7Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>BIT DEPTH REDUCTION</h2>
+          <input type="range" id="var8Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>SCAN LINE</h2>
+          <input type="range" id="var9Range" min="0" max="10" step="1" value="0">
+        </div>
+        <div class="rangeBox">
+          <h2>BLUR</h2>
+          <input type="range" id="var10Range" min="0" max="10" step="1" value="0">
+        </div>
+    </div>
+
+      <div class="underbar"> <!--UNDER BAR-->
+          <label for="undo">undo</label>
+          <label for="reset" style="color: rgb(251, 50, 50);">reset</label>
+          <label for="random" style="color: rgb(0, 228, 167);">random</label>
+          <label for="redo">redo</label>
       </div>
     </div>
   </div>
 
-  <div class="button">
-    <label for="input-file">ㅤimportㅤ</label>
-    <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
-    <label for="export-file" id="export-label">ㅤexportㅤ</label>
-  </div>
 
-  <div class="wrapper">
+  <div class="wrapper"> <!--BACKGROUND-->
     <img src="dither1.jpeg" class="dither1" alt=""> <!-- img by Adobe Stock -->
     <img src="dither2.jpeg" class="dither2" alt=""> <!-- img by Adobe Stock -->
     <img src="dither3.jpeg" class="dither3"alt=""> <!-- img by Adobe Stock -->
     <img src="dither4.jpeg" class="dither4"alt=""> <!-- img by Adobe Stock -->
   </div>
   
-  <footer>
+  <footer> 
     <h1 style="transform: rotate(180deg);">glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch</h1>
   </footer>
 </body>

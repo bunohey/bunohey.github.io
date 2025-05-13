@@ -3,6 +3,10 @@ const sliderIds = Array.from({ length: 10 }, (_, i) => `var${i + 1}Range`);
 const sliders = sliderIds.map(id => document.getElementById(id));
 const ranges = sliderIds.reduce((acc, id) => ({ ...acc, [id]: document.getElementById(id) }), {});
 
+let undoStack = [];
+let redoStack = [];
+const stackSizeLimit = 10; // Limit the size of undo/redo stacks
+
 let lastValues = Array(sliders.length).fill(-1);
 let stage, layer, imageNode, currentImageData;
 
@@ -55,7 +59,13 @@ function loadImage(src) {
   imageObj.onload = () => {
     if (imageNode) imageNode.destroy();
 
-    imageNode = new Konva.Image({ image: imageObj });
+    // Create img border //
+    imageNode = new Konva.Image({
+        image: imageObj,
+        stroke: 'white',
+        strokeWidth: 8
+    });
+    
     layer.destroyChildren();
     layer.add(imageNode);
     fitImageToStage();
@@ -84,11 +94,19 @@ function applyGlitchEffect(force = false) {
   // Skip if no changes
   if (!force && currentValues.every((v, i) => v === lastValues[i])) return;
 
+  if (!force) {
+    undoStack.push([...lastValues]);
+    if (undoStack.length > stackSizeLimit) {
+      undoStack.shift();
+    }
+    redoStack = []; // 새로운 변경이 발생하면 redo 스택을 비웁니다.
+  }
+
   lastValues = [...currentValues];
 
   // Use cached image data
   const cachedData = currentImageData;
-  const width  = imageNode.width();
+  const width = imageNode.width();
   const height = imageNode.height();
 
   // Create a new canvas for glitch effect
@@ -125,58 +143,54 @@ function applyGlitchEffect(force = false) {
 /* #endregion */
 
 /* #region Glitch Effects */
-  /* #region RGB SHIFT */
-  function applyRgbShift(data, width, height) {
-    const strength = parseInt(ranges.var1Range.value);
-    const effectStrength = strength / 10;
-    if (effectStrength === 0) return;
+/* #region RGB SHIFT */
+function applyRgbShift(data, width, height) {
+  const strength = parseInt(ranges.var1Range.value);
+  const effectStrength = strength / 10;
+  if (effectStrength === 0) return;
 
-    const maxOffset = 50;
-    const shiftedData = new Uint8ClampedArray(data);
+  const maxOffset = 50;
+  const shiftedData = new Uint8ClampedArray(data);
 
-    for (let y = 0; y < height; y++) {
-      const rOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
-      const gOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
-      const bOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+  for (let y = 0; y < height; y++) {
+    const rOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+    const gOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
+    const bOffset = Math.floor((Math.random() - 0.2) * maxOffset * effectStrength);
 
-      for (let x = 0; x < width; x++) {
-        const index = (y * width + x) * 4;
+    for (let x = 0; x < width; x++) {
+      const idx = (y * width + x) * 4;
 
-        const rX = Math.min(width - 1, Math.max(0, x + rOffset));
-        const gX = Math.min(width - 1, Math.max(0, x + gOffset));
-        const bX = Math.min(width - 1, Math.max(0, x + bOffset));
+      const rIdx = (y * width + Math.max(0, x - rOffset)) * 4;
+      const gIdx = (y * width + x) * 4;
+      const bIdx = (y * width + Math.min(width - 1, x + bOffset)) * 4;
 
-        const rIndex = (y * width + rX) * 4;
-        const gIndex = (y * width + gX) * 4;
-        const bIndex = (y * width + bX) * 4;
-
-        data[index]     = shiftedData[rIndex];       // R
-        data[index + 1] = shiftedData[gIndex + 1];   // G
-        data[index + 2] = shiftedData[bIndex + 2];   // B
-      }
+      data[idx]     = shiftedData[rIdx];     // R
+      data[idx + 1] = shiftedData[gIdx + 1]; // G
+      data[idx + 2] = shiftedData[bIdx + 2]; // B
     }
-  };
-  /* #endregion */
+  }
+}
+/* #endregion */
 
-  /* #region SATURATION */
-  function applySaturation(data, width, height) {
-    const strength = parseInt(ranges.var2Range.value);
-    const effectStrength = strength / 10;
-    if (effectStrength === 0) return;
+/* #region SATURATION */
+function applySaturation(data, width, height) {
+  const strength = parseInt(ranges.var2Range.value);
+  const effectStrength = strength / 10;
+  if (effectStrength === 0) return;
 
-    const factor = effectStrength * 15;
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i], g = data[i + 1], b = data[i + 2];
-      const gray = 0.3 * r + 0.59 * g + 0.11 * b;
+  const factor = effectStrength * 15;
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const gray = 0.3 * r + 0.59 * g + 0.11 * b;
 
-      data[i]     = Math.min(255, Math.max(0, gray + (r - gray) * factor));
-      data[i + 1] = Math.min(255, Math.max(0, gray + (g - gray) * factor));
-      data[i + 2] = Math.min(255, Math.max(0, gray + (b - gray) * factor));
-    }
-  };
-  /* #endregion */
+    data[i]     = Math.max(0, Math.min(255, gray + (r - gray) * factor));
+    data[i + 1] = Math.max(0, Math.min(255, gray + (g - gray) * factor));
+    data[i + 2] = Math.max(0, Math.min(255, gray + (b - gray) * factor));
+  }
+};
+/* #endregion */
 
-  /* #region NOISE */
+/* #region NOISE */
 function applyNoise(data, width, height) {
   const strength = parseInt(ranges.var3Range.value);
   const effectStrength = strength / 10;
@@ -198,38 +212,38 @@ function applyNoise(data, width, height) {
 };
 /* #endregion */
 
-  /* #region SCRAMBLE */
-  function applyScramble(data, width, height) {
-    const strength = parseInt(ranges.var4Range.value);
-    const effectStrength = strength / 10;
-    if (effectStrength === 0) return;
+/* #region SCRAMBLE */
+function applyScramble(data, width, height) {
+  const strength = parseInt(ranges.var4Range.value);
+  const effectStrength = strength / 10;
+  if (effectStrength === 0) return;
 
-    const blockSize = Math.floor(10 + effectStrength * 30); 
-    const numBlocks = Math.floor(effectStrength * 500);
+  const blockSize = Math.floor(10 + effectStrength * 30); 
+  const numBlocks = Math.floor(effectStrength * 500);
 
-    for (let i = 0; i < numBlocks; i++) {
-      const x1 = Math.floor(Math.random() * (width - blockSize));
-      const y1 = Math.floor(Math.random() * (height - blockSize));
-      const x2 = Math.floor(Math.random() * (width - blockSize));
-      const y2 = Math.floor(Math.random() * (height - blockSize));
+  for (let i = 0; i < numBlocks; i++) {
+    const x1 = Math.floor(Math.random() * (width - blockSize));
+    const y1 = Math.floor(Math.random() * (height - blockSize));
+    const x2 = Math.floor(Math.random() * (width - blockSize));
+    const y2 = Math.floor(Math.random() * (height - blockSize));
 
-      for (let y = 0; y < blockSize; y++) {
-        for (let x = 0; x < blockSize; x++) {
-          const idx1 = ((y1 + y) * width + (x1 + x)) * 4;
-          const idx2 = ((y2 + y) * width + (x2 + x)) * 4;
+    for (let y = 0; y < blockSize; y++) {
+      for (let x = 0; x < blockSize; x++) {
+        const idx1 = ((y1 + y) * width + (x1 + x)) * 4;
+        const idx2 = ((y2 + y) * width + (x2 + x)) * 4;
 
-          for (let c = 0; c < 4; c++) {
-            const temp = data[idx1 + c];
-            data[idx1 + c] = data[idx2 + c];
-            data[idx2 + c] = temp;
-          }
+        for (let c = 0; c < 4; c++) {
+          const temp = data[idx1 + c];
+          data[idx1 + c] = data[idx2 + c];
+          data[idx2 + c] = temp;
         }
       }
     }
-  };
+  }
+}
 /* #endregion */
 
-  /* #region SORTING */
+/* #region SORTING */
 function applySorting(data, width, height) {
   const strength = parseInt(ranges.var5Range.value);
   const effectStrength = strength / 10;
@@ -326,11 +340,11 @@ function applyPixelation(data, width, height) {
 
     const baseLevels = 10;
     const exaggeration = Math.pow(effectStrength, 2.5);
-  
+
     // 단계 수는 유지하되, step을 비정상적으로 크게
     const step = 355 / (baseLevels - exaggeration * 8); 
     const clampedStep = Math.max(1, Math.min(355, step));
-  
+
     for (let i = 0; i < data.length; i += 4) {
       data[i]     = Math.round(data[i]     / clampedStep) * clampedStep;
       data[i + 1] = Math.round(data[i + 1] / clampedStep) * clampedStep;
@@ -388,7 +402,7 @@ function applyPixelation(data, width, height) {
         }
   
         const i = (y * width + x) * 4;
-        data[i]     = r / count;
+        data[i] = r / count;
         data[i + 1] = g / count;
         data[i + 2] = b / count;
       }
@@ -462,12 +476,121 @@ function randomizeSliders() {
 }
 /* #endregion */
 
-/* #region Audio Toggle button */
+/* #region Undo & Redo Button */
+// Undo btn //
+document.querySelector('label[for="undo"]').addEventListener('click', () => {
+  if (undoStack.length > 0) {
+    const previousState = undoStack.pop();
+    redoStack.push([...lastValues]);
+    if (redoStack.length > stackSizeLimit) {
+      redoStack.shift(); // Limit redo stack size
+    }
+
+    sliders.forEach((slider, i) => slider.value = previousState[i]);
+    lastValues = [...previousState];
+    applyGlitchEffect(true);
+  }
+});
+
+// Redo btn//
+document.querySelector('label[for="redo"]').addEventListener('click', () => {
+  if (redoStack.length > 0) {
+    const nextState = redoStack.pop();
+    undoStack.push([...lastValues]);
+    if (undoStack.length > stackSizeLimit) {
+      undoStack.shift(); // Limit undo stack size
+    }
+
+    sliders.forEach((slider, i) => slider.value = nextState[i]);
+    lastValues = [...nextState];
+    applyGlitchEffect(true);
+  }
+});
+/* #endregion */
+
+/* #region Interactive Background Music */
 const bgMusic = document.getElementById('bgmusic');
+
+// Initialize Tone.js effects
+const bitCrusher = new Tone.BitCrusher(12).toDestination();
+const distortion = new Tone.Distortion(0).toDestination();
+const pitchShift = new Tone.PitchShift({ pitch: 0 }).toDestination();
+const feedbackDelay = new Tone.FeedbackDelay('8n', 0).toDestination();
+
+// Connect the audio nodes //
+bgMusic.addEventListener('canplay', () => {
+  const mediaSource = Tone.context.createMediaElementSource(bgMusic);
+  
+  mediaSource.connect(bitCrusher);
+  bitCrusher.connect(distortion);
+  distortion.connect(pitchShift);
+  pitchShift.connect(feedbackDelay);
+  feedbackDelay.connect(Tone.Destination);
+});
+
+// Update audio glitch based on slider values //
+function updateAudioGlitch() {
+  const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
+
+  // Reset
+  bgMusic.playbackRate = 1;
+  bitCrusher.bits = 12;
+  distortion.distortion = 0;
+  pitchShift.pitch = 0;
+  feedbackDelay.feedback = 0;
+
+  if (total <= 10) {
+    // Slow + slight crackle
+    bgMusic.playbackRate = 0.7;
+    distortion.distortion = 0.3;
+    feedbackDelay.feedback = 0.1;
+  } else if (total <= 30) {
+    // Original
+  } else if (total <= 50) {
+    // Fast + bit crushing
+    bgMusic.playbackRate = 1.4;
+    bitCrusher.bits = 6;
+    feedbackDelay.feedback = 0.2;
+  } else if (total <= 71) {
+    // Heartbeat + monster tone
+    pitchShift.pitch = 5;
+    distortion.distortion = 0.8;
+  } else {
+    // Completely crushed
+    bgMusic.playbackRate = 0.5;
+    bitCrusher.bits = 2;
+    distortion.distortion = 1;
+    feedbackDelay.feedback = 0.3;
+  }
+}
+
+// Connect sliders to audio glitch update //
+sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));
+
+// Play music on first click //
+window.addEventListener('click', async () => {
+  await Tone.start();
+  bgMusic.play();
+  updateAudioGlitch();
+}, { once: true });
+/* #endregion */
+
+/* #region Audio Toggle */
 const muteToggle = document.getElementById('mute-toggle');
+let isMuted = false;
 
 muteToggle.addEventListener('click', () => {
-  bgMusic.muted = !bgMusic.muted;
-  muteToggle.src = bgMusic.muted ? 'mute.png' : 'play.png';
+  isMuted = !isMuted;
+  bgMusic.muted = isMuted;
+  muteToggle.src = isMuted ? 'mute.png' : 'play.png';
 });
+
+// Initialize icon state based on initial mute status
+if (bgMusic.muted) {
+  muteToggle.src = 'mute.png';
+  isMuted = true;
+} else {
+  muteToggle.src = 'play.png';
+  isMuted = false;
+}
 /* #endregion */
