@@ -13,6 +13,18 @@ let stage, layer, imageNode, currentImageData;
 // Konva stage and layer setup //
 window.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('container');
+  const initialPopup = document.getElementById('initialPopup');
+  const closePopupButton = document.getElementById('closeBtn');
+
+  // Initial popup //
+    closePopupButton.addEventListener('click', () => {
+    initialPopup.classList.add('fade-out');
+    
+    setTimeout(() => {
+      initialPopup.style.display = 'none';
+    }, 400);
+  });
+  //
 
   // Konva stage and layer //
   stage = new Konva.Stage({ container, width: container.clientWidth, height: container.clientHeight });
@@ -553,9 +565,8 @@ window.addEventListener('click', async () => {
                 bgMusic.play().catch(e => console.error("오디오 재생 오류:", e));
                 updateAudioGlitch();
             }
-        }, { once: true }); // canplaythrough 이벤트는 한 번만 실행
+        }, { once: true });
 
-        // canplaythrough 이벤트가 바로 발생하지 않을 경우를 대비하여 play()를 먼저 시도
         bgMusic.play().catch(e => console.error("초기 오디오 재생 시도 오류:", e));
     }
 }, { once: true });

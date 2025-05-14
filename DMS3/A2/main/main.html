@@ -15,8 +15,13 @@
 </head>
 
 <body>
+  <div class="explanation" id="initialPopup"> <!--POPUP-->
+      <p>Click the speaker icon to turn the background audio on or off</p>
+      <button id="closeBtn">CLOSE</button>
+  </div>
+
   <audio id="bgmusic" src="backgroundmusic.mp3" loop></audio> <!-- mp3 by FreeSound -->
-      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 10;" /> <!-- img by AdobeStock -->
+      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 1000;" /> <!-- img by AdobeStock -->
       
   <header>
     <h1>glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch<h1>
@@ -36,7 +41,7 @@
       <div class="effectsmixer"> <!--EFFECTS MIXER-->
         <div class="rangeBox">
           <h2>RGB SHIFT</h2>
-          <input type="range" id="var1Range" min="0" max="10" step="1" value="0">
+          <input type="range" id="var1Range" min="0" max="10" step="1" value="0" style="z-index: 1000;">
         </div>
         <div class="rangeBox">
           <h2>SATURATION</h2>
