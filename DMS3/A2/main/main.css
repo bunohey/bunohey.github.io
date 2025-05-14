@@ -66,7 +66,7 @@ footer {
   background-image: url("background2.jpg");
   border: 1px solid rgb(255, 255, 255);
   border-radius: 0.4rem;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 #container {

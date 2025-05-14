@@ -556,30 +556,29 @@ if (total <= 10) {
     feedbackDelay.feedback = 0;
   } else if (total <= 30) {
     // Slow + slight crackle
-    bgMusic.playbackRate = 0.7; // Some slowdown
-    distortion.distortion = 0.2; // Slight crackle
-    feedbackDelay.feedback = 0.1; // Minor delay feedback
+    bgMusic.playbackRate = 0.7;
+    distortion.distortion = 0.2;
+    feedbackDelay.feedback = 0.1;
   } else if (total <= 50) {
     // Faster + more distortion (bit crushing)
-    bgMusic.playbackRate = 1.3; // Slightly faster
-    bitCrusher.bits = 8; // Lower bit rate (more distortion)
-    feedbackDelay.feedback = 0.2; // Moderate delay
+    bgMusic.playbackRate = 1.3; 
+    bitCrusher.bits = 8; 
+    feedbackDelay.feedback = 0.2;
   } else if (total <= 71) {
     // Heartbeat + monster-like tone
-    bgMusic.playbackRate = 0.5; // Slow down for heartbeat effect
-    distortion.distortion = 0.8; // Stronger distortion
-    pitchShift.pitch = -5; // Low pitch shift for monstrous sound
-    feedbackDelay.feedback = 0.3; // Stronger feedback
+    bgMusic.playbackRate = 0.5;
+    distortion.distortion = 0.8;
+    pitchShift.pitch = -5; //
+    feedbackDelay.feedback = 0.3;
   } else if (total <= 100) {
-    // Fully crushed (glitch, creepy, distorted)
-    bgMusic.playbackRate = 0.3; // Extreme slowdown
-    bitCrusher.bits = 2; // Severe bit crushing
-    distortion.distortion = 1; // Max distortion
-    feedbackDelay.feedback = 0.4; // Max feedback
-    pitchShift.pitch = -12; // Deep, eerie pitch shift
+    // Fully crushed
+    bgMusic.playbackRate = 0.3; 
+    bitCrusher.bits = 2;
+    distortion.distortion = 1;
+    feedbackDelay.feedback = 0.4;
+    pitchShift.pitch = -12;
   }
 }
-
 
 // Connect sliders to audio glitch update //
 sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));
