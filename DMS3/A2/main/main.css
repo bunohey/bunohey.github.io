@@ -116,7 +116,7 @@ footer {
 .underbar {
   position: relative;
   display: flex;
-  bottom: 0.5rem;
+  bottom: 0.9rem;
   justify-content: space-between;
   z-index: 1;
 }

@@ -530,7 +530,7 @@ let isConnected = false;
 
 // Play music and connect audio graph on first click
 window.addEventListener('click', async () => {
-    await Tone.start();
+    await Tone.start(); // 클릭 시 Tone.start() 호출
 
     if (!isConnected && bgMusic) {
         // bgMusic 요소의 canplaythrough 이벤트 핸들러
@@ -554,6 +554,9 @@ window.addEventListener('click', async () => {
                 updateAudioGlitch();
             }
         }, { once: true }); // canplaythrough 이벤트는 한 번만 실행
+
+        // canplaythrough 이벤트가 바로 발생하지 않을 경우를 대비하여 play()를 먼저 시도
+        bgMusic.play().catch(e => console.error("초기 오디오 재생 시도 오류:", e));
     }
 }, { once: true });
 
