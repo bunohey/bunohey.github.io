@@ -525,18 +525,28 @@ const distortion = new Tone.Distortion(0).toDestination();
 const pitchShift = new Tone.PitchShift({ pitch: 0 }).toDestination();
 const feedbackDelay = new Tone.FeedbackDelay('8n', 0).toDestination();
 
-// Connect the audio nodes //
-bgMusic.addEventListener('canplay', () => {
-  const mediaSource = Tone.context.createMediaElementSource(bgMusic);
-  
-  mediaSource.connect(bitCrusher);
-  bitCrusher.connect(distortion);
-  distortion.connect(pitchShift);
-  pitchShift.connect(feedbackDelay);
-  feedbackDelay.connect(Tone.Destination);
-});
+// 연결 중복 방지
+let mediaSourceConnected = false;
 
-// Update audio glitch based on slider values //
+// Play music and connect audio graph on first click
+window.addEventListener('click', async () => {
+  await Tone.start();
+
+  if (!mediaSourceConnected) {
+    const mediaSource = Tone.context.createMediaElementSource(bgMusic);
+    mediaSource.connect(bitCrusher);
+    bitCrusher.connect(distortion);
+    distortion.connect(pitchShift);
+    pitchShift.connect(feedbackDelay);
+    feedbackDelay.connect(Tone.Destination);
+    mediaSourceConnected = true;
+  }
+
+  bgMusic.play();
+  updateAudioGlitch();
+}, { once: true });
+
+// Update audio glitch based on slider values
 function updateAudioGlitch() {
   const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
 
@@ -547,31 +557,26 @@ function updateAudioGlitch() {
   pitchShift.pitch = 0;
   feedbackDelay.feedback = 0;
 
-if (total <= 10) {
-    // Default music
+  if (total <= 10) {
     bgMusic.playbackRate = 1;
     bitCrusher.bits = 12;
     distortion.distortion = 0;
     pitchShift.pitch = 0;
     feedbackDelay.feedback = 0;
   } else if (total <= 30) {
-    // Slow + slight crackle
     bgMusic.playbackRate = 0.7;
     distortion.distortion = 0.2;
     feedbackDelay.feedback = 0.1;
   } else if (total <= 50) {
-    // Faster + more distortion (bit crushing)
     bgMusic.playbackRate = 1.3; 
     bitCrusher.bits = 8; 
     feedbackDelay.feedback = 0.2;
   } else if (total <= 71) {
-    // Heartbeat + monster-like tone
     bgMusic.playbackRate = 0.5;
     distortion.distortion = 0.8;
-    pitchShift.pitch = -5; //
+    pitchShift.pitch = -5;
     feedbackDelay.feedback = 0.3;
   } else if (total <= 100) {
-    // Fully crushed
     bgMusic.playbackRate = 0.3; 
     bitCrusher.bits = 2;
     distortion.distortion = 1;
@@ -580,15 +585,8 @@ if (total <= 10) {
   }
 }
 
-// Connect sliders to audio glitch update //
+// Connect sliders to audio glitch update
 sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));
-
-// Play music on first click //
-window.addEventListener('click', async () => {
-  await Tone.start();
-  bgMusic.play();
-  updateAudioGlitch();
-}, { once: true });
 /* #endregion */
 
 /* #region Audio Toggle */
