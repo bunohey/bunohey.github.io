@@ -462,14 +462,22 @@ function exportImage() {
 
 /* #region Reset & Random Button */
 // Reset btn //
-document.querySelector('label[for="reset"]').addEventListener('click', resetSliders);
+document.querySelector('label[for="reset"]').addEventListener('click', () => {
+  resetSliders();
+  updateAudioGlitch(); // Add this line
+});
+
 function resetSliders() {
-    sliders.forEach(slider => slider.value = 0);
-    applyGlitchEffect();
-  }
+  sliders.forEach(slider => slider.value = 0);
+  applyGlitchEffect();
+}
 
 // Random btn //
-document.querySelector('label[for="random"]').addEventListener('click', randomizeSliders);
+document.querySelector('label[for="random"]').addEventListener('click', () => {
+  randomizeSliders();
+  updateAudioGlitch(); // Add this line
+});
+
 function randomizeSliders() {
   sliders.forEach(slider => slider.value = Math.floor(Math.random() * 5));
   applyGlitchEffect();
@@ -533,36 +541,45 @@ function updateAudioGlitch() {
   const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
 
   // Reset
-  bgMusic.playbackRate = 1;
+  bgMusic.playbackRate = 1; 
   bitCrusher.bits = 12;
   distortion.distortion = 0;
   pitchShift.pitch = 0;
   feedbackDelay.feedback = 0;
 
-  if (total <= 10) {
-    // Slow + slight crackle
-    bgMusic.playbackRate = 0.7;
-    distortion.distortion = 0.3;
-    feedbackDelay.feedback = 0.1;
+if (total <= 10) {
+    // Default music
+    bgMusic.playbackRate = 1;
+    bitCrusher.bits = 12;
+    distortion.distortion = 0;
+    pitchShift.pitch = 0;
+    feedbackDelay.feedback = 0;
   } else if (total <= 30) {
-    // Original
+    // Slow + slight crackle
+    bgMusic.playbackRate = 0.7; // Some slowdown
+    distortion.distortion = 0.2; // Slight crackle
+    feedbackDelay.feedback = 0.1; // Minor delay feedback
   } else if (total <= 50) {
-    // Fast + bit crushing
-    bgMusic.playbackRate = 1.4;
-    bitCrusher.bits = 6;
-    feedbackDelay.feedback = 0.2;
+    // Faster + more distortion (bit crushing)
+    bgMusic.playbackRate = 1.3; // Slightly faster
+    bitCrusher.bits = 8; // Lower bit rate (more distortion)
+    feedbackDelay.feedback = 0.2; // Moderate delay
   } else if (total <= 71) {
-    // Heartbeat + monster tone
-    pitchShift.pitch = 5;
-    distortion.distortion = 0.8;
-  } else {
-    // Completely crushed
-    bgMusic.playbackRate = 0.5;
-    bitCrusher.bits = 2;
-    distortion.distortion = 1;
-    feedbackDelay.feedback = 0.3;
+    // Heartbeat + monster-like tone
+    bgMusic.playbackRate = 0.5; // Slow down for heartbeat effect
+    distortion.distortion = 0.8; // Stronger distortion
+    pitchShift.pitch = -5; // Low pitch shift for monstrous sound
+    feedbackDelay.feedback = 0.3; // Stronger feedback
+  } else if (total <= 100) {
+    // Fully crushed (glitch, creepy, distorted)
+    bgMusic.playbackRate = 0.3; // Extreme slowdown
+    bitCrusher.bits = 2; // Severe bit crushing
+    distortion.distortion = 1; // Max distortion
+    feedbackDelay.feedback = 0.4; // Max feedback
+    pitchShift.pitch = -12; // Deep, eerie pitch shift
   }
 }
+
 
 // Connect sliders to audio glitch update //
 sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));
