@@ -222,3 +222,84 @@ function randomizeSliders() {
   applyGlitchEffect();
 };
 /* #endregion */
+
+
+// Initialize Tone.js effects
+const bitCrusher = new Tone.BitCrusher(12).toDestination();
+const distortion = new Tone.Distortion(0).toDestination();
+const pitchShift = new Tone.PitchShift({ pitch: 0 }).toDestination();
+const feedbackDelay = new Tone.FeedbackDelay('8n', 0).toDestination();
+
+let mediaSource;
+let isConnected = false;
+
+// Play music and connect audio graph on first click
+window.addEventListener('click', async () => {
+    await Tone.start(); // 클릭 시 Tone.start() 호출
+
+    if (!isConnected && bgMusic) {
+        // bgMusic 요소의 canplaythrough 이벤트 핸들러
+        bgMusic.addEventListener('canplaythrough', () => {
+            try {
+                mediaSource = Tone.context.createMediaElementSource(bgMusic);
+                mediaSource.connect(bitCrusher);
+                bitCrusher.connect(distortion);
+                distortion.connect(pitchShift);
+                pitchShift.connect(feedbackDelay);
+                feedbackDelay.connect(Tone.Destination);
+                isConnected = true;
+                console.log("오디오 그래프 연결 성공"); // 연결 성공 메시지 추가
+            } catch (error) {
+                console.error("오디오 그래프 연결 오류:", error);
+                return;
+            }
+
+            if (bgMusic) {
+                bgMusic.play().catch(e => console.error("오디오 재생 오류:", e));
+                updateAudioGlitch();
+            }
+        }, { once: true });
+
+        bgMusic.play().catch(e => console.error("초기 오디오 재생 시도 오류:", e));
+    }
+}, { once: true });
+
+// Update audio glitch based on slider values
+function updateAudioGlitch() {
+    if (isConnected && Tone.Transport.state === 'started') {
+        const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
+
+        // Reset
+        bgMusic.playbackRate = 1;
+        bitCrusher.bits = 12;
+        distortion.distortion = 0;
+        pitchShift.pitch = 0;
+        feedbackDelay.feedback = 0;
+
+        if (total <= 10) {
+            bgMusic.playbackRate = 1;
+        } else if (total <= 30) {
+            bgMusic.playbackRate = 0.7;
+            distortion.distortion = 0.2;
+            feedbackDelay.feedback = 0.1;
+        } else if (total <= 50) {
+            bgMusic.playbackRate = 1.3;
+            bitCrusher.bits = 8;
+            feedbackDelay.feedback = 0.2;
+        } else if (total <= 71) {
+            bgMusic.playbackRate = 0.5;
+            distortion.distortion = 0.8;
+            pitchShift.pitch = -5;
+            feedbackDelay.feedback = 0.3;
+        } else if (total <= 100) {
+            bgMusic.playbackRate = 0.3;
+            bitCrusher.bits = 2;
+            distortion.distortion = 1;
+            feedbackDelay.feedback = 0.4;
+            pitchShift.pitch = -12;
+        }
+    }
+}
+
+// Connect sliders to audio glitch update
+sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));

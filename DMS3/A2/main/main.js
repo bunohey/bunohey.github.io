@@ -2,6 +2,7 @@
 const sliderIds = Array.from({ length: 10 }, (_, i) => `var${i + 1}Range`);
 const sliders = sliderIds.map(id => document.getElementById(id));
 const ranges = sliderIds.reduce((acc, id) => ({ ...acc, [id]: document.getElementById(id) }), {});
+const bgMusic = document.getElementById('bgMusic');
 
 let undoStack = [];
 let redoStack = [];
@@ -10,21 +11,45 @@ const stackSizeLimit = 10; // Limit the size of undo/redo stacks
 let lastValues = Array(sliders.length).fill(-1);
 let stage, layer, imageNode, currentImageData;
 
-// Konva stage and layer setup //
+// Tone.js setup //
+const bitCrusher = new Tone.BitCrusher(12);
+const distortion = new Tone.Distortion(0);
+const pitchShift = new Tone.PitchShift({ pitch: 0 });
+const feedbackDelay = new Tone.FeedbackDelay('8n', 0);
+const player = new Tone.Player({
+  url: bgMusic.src,
+  loop: true,
+  autoplay: false,
+}).connect(bitCrusher);
+
+  bitCrusher.connect(distortion);
+  distortion.connect(pitchShift);
+  pitchShift.connect(feedbackDelay);
+  feedbackDelay.toDestination();
+
+  let isAudioGraphConnected = false; 
+
+// Konva.js stage & layer setup //
 window.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('container');
   const initialPopup = document.getElementById('initialPopup');
   const closePopupButton = document.getElementById('closeBtn');
 
-  // Initial popup //
-    closePopupButton.addEventListener('click', () => {
+// Initial popup //
+  closePopupButton.addEventListener('click', async () => {
     initialPopup.classList.add('fade-out');
-    
+
     setTimeout(() => {
       initialPopup.style.display = 'none';
     }, 400);
+
+    await Tone.start();
+    player.start(); // Tone.Player 시작
+    if (!isAudioGraphConnected && bgMusic) { // isAudioGraphConnected 사용
+      isAudioGraphConnected = true;
+    }
+    updateAudioGlitch();
   });
-  //
 
   // Konva stage and layer //
   stage = new Konva.Stage({ container, width: container.clientWidth, height: container.clientHeight });
@@ -36,8 +61,9 @@ window.addEventListener("DOMContentLoaded", () => {
     ranges[slider.id] = slider;
     slider.addEventListener('input', () => {
       applyGlitchEffect();
+      updateAudioGlitch();
+    });
   });
-});
 
   // File Upload event listener //
   document.getElementById('input-file').addEventListener('change', handleFileUpload);
@@ -52,46 +78,46 @@ window.addEventListener("DOMContentLoaded", () => {
   loadImage('Woman.jpg'); // img by AdobeStock //
 });
 
-// Fit image to stage, maintain aspect ratio //
-function fitImageToStage() {
-  const cw = stage.width(), ch = stage.height();
-  const iw = imageNode.width(), ih = imageNode.height();
-  const ratio = iw / ih, boxRatio = cw / ch;
-  const newW = ratio > boxRatio ? cw : ch * ratio;
-  const newH = ratio > boxRatio ? cw / ratio : ch;
-  imageNode.size({ width: newW, height: newH });
-  imageNode.position({ x: (cw - newW) / 2, y: (ch - newH) / 2 });
-  layer.batchDraw();
-};
+  // Fit image to stage, maintain aspect ratio //
+  function fitImageToStage() {
+    const cw = stage.width(), ch = stage.height();
+    const iw = imageNode.width(), ih = imageNode.height();
+    const ratio = iw / ih, boxRatio = cw / ch;
+    const newW = ratio > boxRatio ? cw : ch * ratio;
+    const newH = ratio > boxRatio ? cw / ratio : ch;
+    imageNode.size({ width: newW, height: newH });
+    imageNode.position({ x: (cw - newW) / 2, y: (ch - newH) / 2 });
+    layer.batchDraw();
+  };
 
-// Load image and cache original data //
-function loadImage(src) {
-  const imageObj = new Image();
-  imageObj.crossOrigin = "anonymous";
-  imageObj.onload = () => {
-    if (imageNode) imageNode.destroy();
+  // Load image and cache original data //
+  function loadImage(src) {
+    const imageObj = new Image();
+    imageObj.crossOrigin = "anonymous";
+    imageObj.onload = () => {
+      if (imageNode) imageNode.destroy();
 
-    // Create img border //
-    imageNode = new Konva.Image({
-        image: imageObj,
-        stroke: 'white',
-        strokeWidth: 1.3
-    });
-    
-    layer.destroyChildren();
-    layer.add(imageNode);
-    fitImageToStage();
+      // Create img border //
+      imageNode = new Konva.Image({
+          image: imageObj,
+          stroke: 'white',
+          strokeWidth: 1.3
+      });
+      
+      layer.destroyChildren();
+      layer.add(imageNode);
+      fitImageToStage();
 
-    // cache original pixels
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = imageNode.width();
-    tempCanvas.height = imageNode.height();
-    const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height, 0, 0, tempCanvas.width, tempCanvas.height);
-    currentImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+  // cache original pixels
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = imageNode.width();
+  tempCanvas.height = imageNode.height();
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCtx.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height, 0, 0, tempCanvas.width, tempCanvas.height);
+  currentImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 
-    resetSliders();
-    applyGlitchEffect();
+  resetSliders();
+  applyGlitchEffect();
   };
   imageObj.src = src;
 };
@@ -111,7 +137,7 @@ function applyGlitchEffect(force = false) {
     if (undoStack.length > stackSizeLimit) {
       undoStack.shift();
     }
-    redoStack = []; // 새로운 변경이 발생하면 redo 스택을 비웁니다.
+    redoStack = [];
   }
 
   lastValues = [...currentValues];
@@ -317,7 +343,7 @@ function applyPixelation(data, width, height) {
   const effectStrength = strength / 10;
   if (effectStrength === 0) return;
 
-  const pixelSize = Math.floor(2 + effectStrength * 20);
+  const pixelSize = Math.floor(2 + effectStrength * 10);
 
   for (let y = 0; y < height; y += pixelSize) {
     for (let x = 0; x < width; x += pixelSize) {
@@ -369,7 +395,7 @@ function applyPixelation(data, width, height) {
   function applyScanLine(data, width, height) {
     const strength = parseInt(ranges.var9Range.value);
     const lineGap = 2 + Math.floor(10 - strength);
-    const darkness = strength * 20;
+    const darkness = strength * 10;
   
     for (let y = 0; y < height; y++) {
       if (y % lineGap === 0) {
@@ -491,7 +517,7 @@ document.querySelector('label[for="random"]').addEventListener('click', () => {
 });
 
 function randomizeSliders() {
-  sliders.forEach(slider => slider.value = Math.floor(Math.random() * 5));
+  sliders.forEach(slider => slider.value = Math.floor(Math.random() * 7));
   applyGlitchEffect();
 }
 /* #endregion */
@@ -528,88 +554,69 @@ document.querySelector('label[for="redo"]').addEventListener('click', () => {
 });
 /* #endregion */
 
-/* #region Interactive Background Music */
-const bgMusic = document.getElementById('bgmusic');
-
-// Initialize Tone.js effects
-const bitCrusher = new Tone.BitCrusher(12).toDestination();
-const distortion = new Tone.Distortion(0).toDestination();
-const pitchShift = new Tone.PitchShift({ pitch: 0 }).toDestination();
-const feedbackDelay = new Tone.FeedbackDelay('8n', 0).toDestination();
-
-let mediaSource;
-let isConnected = false;
-
-// Play music and connect audio graph on first click
-window.addEventListener('click', async () => {
-    await Tone.start(); // 클릭 시 Tone.start() 호출
-
-    if (!isConnected && bgMusic) {
-        // bgMusic 요소의 canplaythrough 이벤트 핸들러
-        bgMusic.addEventListener('canplaythrough', () => {
-            try {
-                mediaSource = Tone.context.createMediaElementSource(bgMusic);
-                mediaSource.connect(bitCrusher);
-                bitCrusher.connect(distortion);
-                distortion.connect(pitchShift);
-                pitchShift.connect(feedbackDelay);
-                feedbackDelay.connect(Tone.Destination);
-                isConnected = true;
-                console.log("오디오 그래프 연결 성공"); // 연결 성공 메시지 추가
-            } catch (error) {
-                console.error("오디오 그래프 연결 오류:", error);
-                return;
-            }
-
-            if (bgMusic) {
-                bgMusic.play().catch(e => console.error("오디오 재생 오류:", e));
-                updateAudioGlitch();
-            }
-        }, { once: true });
-
-        bgMusic.play().catch(e => console.error("초기 오디오 재생 시도 오류:", e));
-    }
-}, { once: true });
-
-// Update audio glitch based on slider values
+/* #region Audio Glitch */
 function updateAudioGlitch() {
-    if (isConnected && Tone.Transport.state === 'started') {
-        const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
+  if (bgMusic && Tone.context.state === 'running') {
+    const total = sliders.reduce((sum, s) => sum + Number(s.value), 0);
 
-        // Reset
-        bgMusic.playbackRate = 1;
-        bitCrusher.bits = 12;
-        distortion.distortion = 0;
-        pitchShift.pitch = 0;
-        feedbackDelay.feedback = 0;
+    // Reset effects
+    player.playbackRate = 1;
+    bitCrusher.bits = 12;
+    distortion.distortion = 0;
+    pitchShift.pitch = 0;
+    feedbackDelay.delayTime.value = '8n';
+    feedbackDelay.feedback.value = 0;
 
-        if (total <= 10) {
-            bgMusic.playbackRate = 1;
-        } else if (total <= 30) {
-            bgMusic.playbackRate = 0.7;
-            distortion.distortion = 0.2;
-            feedbackDelay.feedback = 0.1;
-        } else if (total <= 50) {
-            bgMusic.playbackRate = 1.3;
-            bitCrusher.bits = 8;
-            feedbackDelay.feedback = 0.2;
-        } else if (total <= 71) {
-            bgMusic.playbackRate = 0.5;
-            distortion.distortion = 0.8;
-            pitchShift.pitch = -5;
-            feedbackDelay.feedback = 0.3;
-        } else if (total <= 100) {
-            bgMusic.playbackRate = 0.3;
-            bitCrusher.bits = 2;
-            distortion.distortion = 1;
-            feedbackDelay.feedback = 0.4;
-            pitchShift.pitch = -12;
-        }
+    if (total < 11) { // 1~10
+      player.playbackRate = 1.0;
+      bitCrusher.bits = 16;
+      distortion.distortion = 0;
+      pitchShift.pitch = 0;
+      feedbackDelay.feedback.value = 0;
+      feedbackDelay.delayTime.value = '4n';
+
+    } else if (total < 21) { // 11~20
+      player.playbackRate = 0.98;
+      bitCrusher.bits = 15;
+      distortion.distortion = 0.01;
+      pitchShift.pitch = -0.2 + Math.random() * 0.1; // -0.2 ~ -0.1
+      feedbackDelay.feedback.value = 0.01;
+      feedbackDelay.delayTime.value = '4n';
+
+    } else if (total < 41) { // 21~40
+      player.playbackRate = 0.96;
+      bitCrusher.bits = 13;
+      distortion.distortion = 0.03;
+      pitchShift.pitch = -0.4 + Math.random() * 0.1; // -0.4 ~ -0.3
+      feedbackDelay.feedback.value = 0.02;
+      feedbackDelay.delayTime.value = '4n';
+
+    } else if (total < 61) { // 41~60
+      player.playbackRate = 0.93;
+      bitCrusher.bits = 11;
+      distortion.distortion = 0.06;
+      pitchShift.pitch = -0.8 + Math.random() * 0.2; // -0.8 ~ -0.6
+      feedbackDelay.feedback.value = 0.035;
+      feedbackDelay.delayTime.value = '4n';
+
+    } else if (total < 81) { // 61~80
+      player.playbackRate = 0.90;
+      bitCrusher.bits = 9;
+      distortion.distortion = 0.1;
+      pitchShift.pitch = -1.2 + Math.random() * 0.2; // -1.2 ~ -1.0
+      feedbackDelay.feedback.value = 0.05;
+      feedbackDelay.delayTime.value = '4n';
+
+    } else { // 81~100
+      player.playbackRate = 0.87 + Math.random() * 0.01;
+      bitCrusher.bits = 7;
+      distortion.distortion = 0.15;
+      pitchShift.pitch = -1.6 + Math.random() * 0.2; // -1.6 ~ -1.4
+      feedbackDelay.feedback.value = 0.07;
+      feedbackDelay.delayTime.value = '4n';
     }
+  }
 }
-
-// Connect sliders to audio glitch update
-sliders.forEach(slider => slider.addEventListener('input', updateAudioGlitch));
 /* #endregion */
 
 /* #region Audio Toggle */
@@ -618,11 +625,11 @@ let isMuted = false;
 
 muteToggle.addEventListener('click', () => {
   isMuted = !isMuted;
-  bgMusic.muted = isMuted;
+  player.mute = isMuted;
   muteToggle.src = isMuted ? 'mute.png' : 'play.png';
 });
 
-if (bgMusic.muted) {
+if (player.mute) {
   muteToggle.src = 'mute.png';
   isMuted = true;
 } else {
