@@ -75,7 +75,7 @@ function loadImage(src) {
     imageNode = new Konva.Image({
         image: imageObj,
         stroke: 'white',
-        strokeWidth: 8
+        strokeWidth: 1.3
     });
     
     layer.destroyChildren();

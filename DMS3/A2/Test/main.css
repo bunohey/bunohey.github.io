@@ -78,7 +78,7 @@ h2 {
 
   .button label:hover {
     color: #fff;
-    text-shadow: 0 0 50px rgb(255, 255, 255);
+    text-shadow: 0 0 50px rgb(255, 0, 0);
   }
 
   .button input, output {

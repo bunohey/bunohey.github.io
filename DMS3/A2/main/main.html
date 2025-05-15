@@ -15,13 +15,15 @@
 </head>
 
 <body>
-  <div class="explanation" id="initialPopup"> <!--POPUP-->
-      <p>Click the speaker icon to turn the background audio on or off</p>
-      <button id="closeBtn">CLOSE</button>
-  </div>
-
   <audio id="bgmusic" src="backgroundmusic.mp3" loop></audio> <!-- mp3 by FreeSound -->
-      <img id="mute-toggle" src="play.png" alt="Toggle Mute" style="width: 60px; position: absolute; top: 2rem; right: 2rem; z-index: 1000;" /> <!-- img by AdobeStock -->
+  <img id="mute-toggle" src="play.png" alt="Toggle Mute"> <!-- img by AdobeStock -->
+
+  <div class="explanation" id="initialPopup"> <!--POPUP-->
+    <p>
+      Click the speaker icon to<br>turn the background audio on or off<br>
+      <button id="closeBtn">close</button>
+    </p>
+  </div>
       
   <header>
     <h1>glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch glitch n switch<h1>
@@ -40,8 +42,8 @@
 
       <div class="effectsmixer"> <!--EFFECTS MIXER-->
         <div class="rangeBox">
-          <h2>RGB SHIFT</h2>
-          <input type="range" id="var1Range" min="0" max="10" step="1" value="0" style="z-index: 1000;">
+          <h2>RGB  SHIFT</h2>
+          <input type="range" id="var1Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
           <h2>SATURATION</h2>
@@ -56,11 +58,11 @@
           <input type="range" id="var4Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
-          <h2>SORTING</h2>
+          <h2>PIXEL  SORTING</h2>
           <input type="range" id="var5Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
-          <h2>CHROMATIC ABERRATION</h2>
+          <h2>CHROMATIC  ABERRATION</h2>
           <input type="range" id="var6Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
@@ -68,11 +70,11 @@
           <input type="range" id="var7Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
-          <h2>BIT DEPTH REDUCTION</h2>
+          <h2>BIT  DEPTH  REDUCTION</h2>
           <input type="range" id="var8Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">
-          <h2>SCAN LINE</h2>
+          <h2>SCANLINES</h2>
           <input type="range" id="var9Range" min="0" max="10" step="1" value="0">
         </div>
         <div class="rangeBox">

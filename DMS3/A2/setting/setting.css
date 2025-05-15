@@ -6,7 +6,7 @@ body {
 
 }
 
-#mute-toggle, .underbar label, #closeBtn, .button label, input[type=range]:hover {
+#mute-toggle, .topbar label, .underbar label, #closeBtn, .button label, input[type=range]:hover {
   cursor: url("cursor2.png"), auto; /* img by CustomCursor */
 }
 
