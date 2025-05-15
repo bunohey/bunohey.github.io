@@ -16,16 +16,15 @@ const bitCrusher = new Tone.BitCrusher(12);
 const distortion = new Tone.Distortion(0);
 const pitchShift = new Tone.PitchShift({ pitch: 0 });
 const feedbackDelay = new Tone.FeedbackDelay('8n', 0);
+const volume = new Tone.Volume(-30).toDestination(); // lower volume //
+
 const player = new Tone.Player({
   url: bgMusic.src,
   loop: true,
   autoplay: false,
-}).connect(bitCrusher);
+});
 
-  bitCrusher.connect(distortion);
-  distortion.connect(pitchShift);
-  pitchShift.connect(feedbackDelay);
-  feedbackDelay.toDestination();
+player.chain(bitCrusher, distortion, pitchShift, feedbackDelay, volume);
 
   let isAudioGraphConnected = false; 
 
@@ -379,7 +378,6 @@ function applyPixelation(data, width, height) {
     const baseLevels = 10;
     const exaggeration = Math.pow(effectStrength, 2.5);
 
-    // 단계 수는 유지하되, step을 비정상적으로 크게
     const step = 355 / (baseLevels - exaggeration * 8); 
     const clampedStep = Math.max(1, Math.min(355, step));
 
