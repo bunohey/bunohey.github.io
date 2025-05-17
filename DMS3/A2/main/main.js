@@ -16,7 +16,7 @@ const bitCrusher = new Tone.BitCrusher(12);
 const distortion = new Tone.Distortion(0);
 const pitchShift = new Tone.PitchShift({ pitch: 0 });
 const feedbackDelay = new Tone.FeedbackDelay('8n', 0);
-const volume = new Tone.Volume(-30).toDestination(); // lower volume //
+const volume = new Tone.Volume(10).toDestination();
 
 const player = new Tone.Player({
   url: bgMusic.src,

@@ -21,7 +21,7 @@ h2 {
   font-size: 1rem;
   font-weight: 400;
   margin: 1rem;
-  color: #000000;
+  color: #ff0000;
 } /* #endregion */
 
 /* #region Notice */
@@ -92,7 +92,7 @@ h2 {
 /* #region Alert */
 .alert {
   padding: 20px;
-  background-color: #e80000;
+  background-color: #000000;
   color: white;
   position: absolute;
   top: 50%;
@@ -106,16 +106,16 @@ h2 {
 }
 
 #confirmBtn {
-  font-family: "Jacquard 12", system-ui;
-  font-size: 1.3rem;
-  font-weight: 1;
-  color: #ffffff;
-  background-color: #000000;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #000000;
+  background-color: #f60000;
   border: none;
   transition: 0.15s;
   display: block;
   height: 40%;
-  width: 30%;
+  width: 20%;
 }
 
 #confirmBtn:hover {
@@ -136,6 +136,7 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  z-index: 200;
   animation: text-ani 1.5s linear infinite alternate-reverse;
 } /* #endregion */
 

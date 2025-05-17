@@ -35,10 +35,14 @@ function startLoading() {
         // audio by FreeSound //
         const insertTapeSound = new Audio("inserttape.wav");
         const casioGlitchSound = new Audio("casio_glitch.wav");
+        // video by Pexels //
+        const VHS = document.getElementById("vhsVideo");
 
         insertTapeSound.play();
         insertTapeSound.addEventListener("ended", () => {
           casioGlitchSound.play();
+          VHS.style.display = "block";
+          VHS.play();
         });
 
         document.body.style.backgroundImage = "none";
@@ -49,9 +53,9 @@ function startLoading() {
 
           setTimeout(() => {
             window.location.href = "../main/main.html";
-          }, 3000); // Delay before moving to main page //
-        }, 9000); // Delay before showing welcome //
+          }, 5000); // delay before navigating to main page
+        }, 9000); // delay before showing welcome message
       });
-    }, 3500); // Wait before hiding loading bar //
-  }, 2000); // Delay before starting loading animation //
+    }, 3500); // wait before hiding loading bar
+  }, 2000); // delay before starting loading animation
 }
