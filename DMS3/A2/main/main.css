@@ -171,16 +171,15 @@ p {
     letter-spacing: -0.3rem;
     font-size: 2.6rem;
     color: #ff0000;
-    transition: 0.5s;
+    transition: 0.4s;
   }
 
   .topbar label:hover {
     color: #ffffff;
     text-shadow: 0 0 35px rgb(140, 138, 138);
-    font-family: "Rubik Glitch", system-ui;
-    letter-spacing: 1.3rem;
-    font-size: 2.2rem;
-    font-weight: 100;
+    font-size: 2rem;
+    letter-spacing: 1.8rem;
+    font-weight: normal;
   }
 
   .topbar input, output {
