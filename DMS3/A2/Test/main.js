@@ -2,7 +2,7 @@
 const sliderIds = Array.from({ length: 10 }, (_, i) => `var${i + 1}Range`);
 const sliders = sliderIds.map(id => document.getElementById(id));
 const ranges = sliderIds.reduce((acc, id) => ({ ...acc, [id]: document.getElementById(id) }), {});
-const bgMusic = document.getElementById('bgMusic');
+const bgMusic = document.getElementById('bgMusic'); // audio by Youtube audio library //
 
 let undoStack = [];
 let redoStack = [];
@@ -16,7 +16,7 @@ const bitCrusher = new Tone.BitCrusher(12);
 const distortion = new Tone.Distortion(0);
 const pitchShift = new Tone.PitchShift({ pitch: 0 });
 const feedbackDelay = new Tone.FeedbackDelay('8n', 0);
-const volume = new Tone.Volume(-30).toDestination(); // lower volume //
+const volume = new Tone.Volume(10).toDestination();
 
 const player = new Tone.Player({
   url: bgMusic.src,
@@ -565,7 +565,7 @@ function updateAudioGlitch() {
     feedbackDelay.delayTime.value = '8n';
     feedbackDelay.feedback.value = 0;
 
-    if (total < 11) { // 1~10
+    if (total < 16) { // 0~16
       player.playbackRate = 1.0;
       bitCrusher.bits = 16;
       distortion.distortion = 0;
@@ -573,44 +573,28 @@ function updateAudioGlitch() {
       feedbackDelay.feedback.value = 0;
       feedbackDelay.delayTime.value = '4n';
 
-    } else if (total < 21) { // 11~20
-      player.playbackRate = 0.98;
+    } else if (total < 46) { // 17~45 
+      player.playbackRate = 0.95;
       bitCrusher.bits = 15;
       distortion.distortion = 0.01;
-      pitchShift.pitch = -0.2 + Math.random() * 0.1; // -0.2 ~ -0.1
+      pitchShift.pitch = -0.2 + Math.random() * 0.1;
       feedbackDelay.feedback.value = 0.01;
       feedbackDelay.delayTime.value = '4n';
 
-    } else if (total < 41) { // 21~40
-      player.playbackRate = 0.96;
-      bitCrusher.bits = 13;
-      distortion.distortion = 0.03;
-      pitchShift.pitch = -0.4 + Math.random() * 0.1; // -0.4 ~ -0.3
+    } else if (total < 76) { // 46~75
+      player.playbackRate = 0.85;
+      bitCrusher.bits = 14;
+      distortion.distortion = 0.02;
+      pitchShift.pitch = -0.3 + Math.random() * 0.1;
       feedbackDelay.feedback.value = 0.02;
       feedbackDelay.delayTime.value = '4n';
 
-    } else if (total < 61) { // 41~60
-      player.playbackRate = 0.93;
-      bitCrusher.bits = 11;
-      distortion.distortion = 0.06;
-      pitchShift.pitch = -0.8 + Math.random() * 0.2; // -0.8 ~ -0.6
-      feedbackDelay.feedback.value = 0.035;
-      feedbackDelay.delayTime.value = '4n';
-
-    } else if (total < 81) { // 61~80
-      player.playbackRate = 0.90;
-      bitCrusher.bits = 9;
-      distortion.distortion = 0.1;
-      pitchShift.pitch = -1.2 + Math.random() * 0.2; // -1.2 ~ -1.0
-      feedbackDelay.feedback.value = 0.05;
-      feedbackDelay.delayTime.value = '4n';
-
-    } else { // 81~100
-      player.playbackRate = 0.87 + Math.random() * 0.01;
-      bitCrusher.bits = 7;
-      distortion.distortion = 0.15;
-      pitchShift.pitch = -1.6 + Math.random() * 0.2; // -1.6 ~ -1.4
-      feedbackDelay.feedback.value = 0.07;
+    } else { // 76~100
+      player.playbackRate = 0.80; 
+      bitCrusher.bits = 13;
+      distortion.distortion = 0.3;
+      pitchShift.pitch = -0.4 + Math.random() * 0.1;
+      feedbackDelay.feedback.value = 0.03;
       feedbackDelay.delayTime.value = '4n';
     }
   }
