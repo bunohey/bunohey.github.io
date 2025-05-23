@@ -43,8 +43,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 400);
 
     await Tone.start();
-    player.start(); // Tone.Player 시작
-    if (!isAudioGraphConnected && bgMusic) { // isAudioGraphConnected 사용
+    player.start(); // play audio //
+    if (!isAudioGraphConnected && bgMusic) {
       isAudioGraphConnected = true;
     }
     updateAudioGlitch();
