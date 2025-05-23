@@ -11,7 +11,7 @@ Initially, I considered adding smooth animations to the background color changes
 
 Overall, the design is minimal and clean, reducing distractions and cognitive load. This makes the test accessible to everyone, including people sensitive to sound or overly busy visuals. The goal was to create a simple but engaging tool that anyone can use casually, without pressure or complex setup. I also included a footer that says “© 2025 Reaction Time Test,” which is a small detail but adds a professional touch and shows that I took this project seriously.
 
-I hope this can be a fun little challenge that anyone can jump into anytime and enjoy. It’s simple, effective, and keeps users coming back for more :) */
+I chose to create a reaction time test because I’ve personally tried many similar sites and have always enjoyed fast-paced games. I wanted to build something of my own that captures that excitement. So, I hope this can be a fun little challenge that anyone can jump into anytime and enjoy. It’s simple, effective, and keeps users coming back for more :)*/
 
 /* #region DOM & Settings */
 const intro = document.getElementById('intro');

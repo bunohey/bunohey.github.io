@@ -12,7 +12,6 @@ body {
     align-items: center ;
     gap: 0.6rem;
     cursor: url('cursor.png'), auto;
-
 }
 
 
@@ -100,15 +99,24 @@ p {
     line-height: 0rem;
 }
 
-small { 
+ small {
     font-family: "Palanquin Dark", sans-serif;
-    color: rgba(53, 51, 51, 0.224);
+    color: rgba(58, 58, 58, 0.538);
     letter-spacing: 0rem;
     font-size: 1.5rem;
     font-weight: 800;
     position: absolute;
     bottom: 1.5vh;
     margin: 0;
+    animation: clickToRestart 1.3s ease-in-out infinite;
+}
+    @keyframes clickToRestart {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
 }
 
 main {
@@ -127,18 +135,19 @@ main {
     text-align: center;
     cursor: url('hover.png'), auto;
 }
+
     #intro {
         background-color: rgb(230, 213, 151);
     }
 
-    #intro p {
-    font-size: 1.5rem;
-    letter-spacing: 0.2rem;
-    opacity: 0;
-    transform: translateY(-45px);
-    animation: slideDownOnce 1.2s ease-out 1.4s forwards,
-               flickerOpacity 1.8s infinite alternate 3.4s;
-}
+        #intro p {
+        font-size: 1.5rem;
+        letter-spacing: 0rem;
+        opacity: 0;
+        transform: translateY(-45px);
+        animation: slideDownOnce 1.2s ease-out 1.4s forwards,
+                clickToStart 1.8s infinite alternate 3.4s;
+    }
 
         @keyframes slideDownOnce {
             to {
@@ -147,7 +156,7 @@ main {
             }
         }
 
-        @keyframes flickerOpacity {
+        @keyframes clickToStart {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 0; }
         }
@@ -169,12 +178,12 @@ main {
     }
 
     
-      #result p {
-    font-size: 2.2  rem;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideDownOnce2 0.8s ease-out forwards;
-}
+        #result p {
+        font-size: 2.2  rem;
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: slideDownOnce2 0.8s ease-out forwards;
+        }
 
         #result p:nth-of-type(1) {
             animation-delay: 0s;
