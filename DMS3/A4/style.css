@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Instrument+Serif:ital@0;1&family=Jomolhari&family=Oranienbaum&family=Rubik+Scribble&family=Special+Gothic+Expanded+One&display=swap');
+
+/* #region Paragraphs */
+.bullets {
+  list-style-type: disc;
+} 
+
+.bullets li {
+  margin-bottom: 1.5rem;
+  line-height: 1.5rem;
+  font-family: "Funnel Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.05rem;
+  font-size: 1.1rem;
+  color: rgb(43, 43, 43);
+}
+
+p {
+  font-family: "Funnel Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.05rem;
+  line-height: 1.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: rgb(43, 43, 43);
+}
+
+small {
+  font-family: "Instrument Serif", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 2.6rem;
+  margin-top: 0.5rem;
+  letter-spacing: 0.3rem;
+  margin-top: 0rem;
+  color: rgb(27, 27, 27);
+  animation: wriggle 2s infinite;
+}
+
+    @keyframes wriggle {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    33%  { transform: translate(var(--moveX), var(--moveY)) rotate(var(--rotate)); }
+    66%  { transform: translate(calc(var(--moveX) * -1), calc(var(--moveY) * -1)) rotate(calc(var(--rotate) * -1)); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+
+h1 {
+  font-family: "Arial", sans-serif;
+  font-size: 4.4rem;
+  line-height: 4rem;
+  letter-spacing: -0.3rem; 
+  font-weight: 800;
+  margin-top: 0vh;
+  margin-bottom: 1.2rem;
+}
+
+h2 {
+  font-family:  "Oranienbaum", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 1.4rem;
+  color: rgb(0, 0, 0);
+  letter-spacing: 0.5rem;
+  margin: 0.4rem;
+}
+
+h3 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 1.5rem;
+  margin-bottom: -0.5rem;
+  margin-top: 3rem;
+  color: rgb(0, 0, 0);
+}
+
+#introPara {
+  display: block;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  margin-left: 7rem;
+  margin-right: 7rem;
+}
+
+#open {
+  color: rgb(0, 0, 0);
+  font-family: "Oranienbaum", serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.5rem;
+  text-decoration-skip-ink: auto;
+}
+    #open:hover {
+      color: rgb(255, 255, 255);
+      transition: 0.5s;
+      text-shadow: 2px 2px 0 #030303;
+      cursor: url('cursor.png'), auto;
+    }
+
+/* #endregion */
+
+/* #region Layout */
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  gap: 2.5rem;
+  background-color: rgb(218, 212, 204);
+  cursor: url('hover.png'), auto;
+}
+
+  ::selection {
+    background-color: #181717;
+    color: #ffffff;
+  }
+
+.layoutLeft {
+  width: 25vw;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-top: 3rem;
+  margin-left: 4rem;
+}
+
+.layoutRight {
+  width: 60vw;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-top: 3.5rem;
+}
+
+  header {
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    background-color: transparent;
+    border: 9px double rgb(37, 37, 37);
+    border-radius: 5px;
+    box-shadow: 3px 3px 0px black;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    font-family: "Instrument Serif", serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    color: #1d1d1d;
+  }
+
+  .container {
+    border: 4px solid rgb(37, 37, 37);
+    border-radius: 5px;
+    box-shadow: 3px 3px 0px black
+  }
+/* #endregion */
+
+/* #region Toggle */
+.categoryToggle {
+cursor: pointer;
+background-color: transparent;
+padding: 6px 15px;
+transition: background-color 1s ease;
+position: relative;
+border-radius: 5px;
+background-color: rgb(218, 212, 204);
+box-shadow: 4px 4px 0px black;
+width: 22vw;
+}
+
+  .categoryToggle:hover {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 0 #030303;
+    transition: 0.5s;
+    cursor: url('cursor.png'), auto;
+  }
+
+  .categoryToggle::after {
+    content: "✪";
+    position: absolute;
+    right: 15px;
+    bottom: 7px;
+    transition: transform 0.4s ease;
+  }
+
+  .categoryToggle.active {
+    color: white;
+    text-shadow: 2px 2px 0 #030303;
+  }
+
+.paragraph {
+  max-height: 0.2rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  display: none;
+}
+
+  .paragraph.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    display: block;
+    margin-left: 5rem;
+    margin-right: 6rem;
+    margin-top: -13rem;
+    margin-bottom: 3rem;
+    transition: opacity 0.6s ease;
+  }
+/* #endregion */

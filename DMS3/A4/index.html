@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Judgments & Critical Analysis</title>
+  <link rel="icon" href="favicon.png"> <!-- img from FlatIcon-->
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="layoutLeft">
+    <small>✶GLITCHㅤNㅤSWITCH✶</small>
+    <h1>Design<br>Reasoning<br>and Critical<br>Analysis</h1>
+    <small style="font-size: 1.5rem; margin-bottom: 5vh; letter-spacing: 0.2.5rem;">❝AestheticsㅤofㅤImperfection❞</small>
+
+    <h2 class="categoryToggle" id="purposeToggle">Purpose</h2>
+    <h2 class="categoryToggle" id="worthToggle">Worth</h2>
+    <h2 class="categoryToggle" id="framingToggle">Framing</h2>
+    <h2 class="categoryToggle" id="appearanceToggle">Appearance</h2>
+    <h2 class="categoryToggle" id="qualityToggle">Quality</h2>
+    <h2 class="categoryToggle" id="compositionToggle">Composition</h2>
+    <h2 class="categoryToggle" id="navigationToggle">Navigation</h2>
+  </div>
+
+  <div class="layoutRight">
+    <header>
+      ✦ Click the category titles to expand and view the content ✦
+    </header>
+
+    <div class="container">
+      <div class="paragraph" id="introPara"> <!-- INTRODUCTION -->
+        <p>This page critically reflects on the key design decisions made during the development of the 'Glitch n Switch' project. It explores the project’s intent, value, aesthetics, technical limitations, and compositional strategies. Through these considerations and decisions, 'Glitch n Switch' became more than just an image editing tool—it became a space to discover new beauty in imperfection and enjoy the freedom of creative experimentation. I invite you to experience and enjoy the full potential of this platform :D</p>
+        <a href="https://bunohey.github.io/DMS3/A2/loading/loading.html" target="_blank" id="open">➥ Open 'Glitch n Switch' in new tab</a>
+      </div>
+
+      <div class="paragraph" id="purposePara"> <!-- 1) PURPOSE -->
+        <h3>Desired Outcome</h3>
+          <p>The primary ambition behind 'Glitch n Switch' was to create a web-based tool that goes beyond traditional image editing. It aimed to provide an immersive experience in glitch art—celebrating distortion, errors, and imperfection as sources of beauty and creativity.</p>
+        <h3>Core Intent</h3>
+          <p>While digital artists and design students were the target users, the ultimate goal was to make glitch art accessible and enjoyable for anyone. To support this, I focused on creating an interactive interface that responds in real time, allowing users to produce unexpected visual results and discover new aesthetic possibilities. Rather than being a mere tool, 'Glitch n Switch' aspires to be a creative space for exploring imperfection in the digital age.</p>
+        <h3>Evolution</h3>
+          <p>Initially, the focus was purely on implementing glitch effects. However, as the project progressed, it gained philosophical depth, embracing the concept of “imperfection as beauty” and expanding the objective to offer a new kind of creative experience.</p>
+        </div>
+
+      <div class="paragraph" id="worthPara"><!-- 2) WORTH -->
+          <h3>Value Beyond Novelty</h3>
+            <p>'Glitch n Switch' pursued values that extend beyond simply producing unique outcomes:</p>
+          <ul class="bullets">
+            <li><strong>Creative Freedom and Embracing Imperfection:</strong><br>
+              Growing up in a culture that prioritizes perfection, I wanted to encourage users to let go of perfectionism and discover beauty in randomness and unpredictability. This project advocates for creative expression without constraints.</li>
+            <li><strong>Reframing 'Error':</strong><br>
+              Rather than viewing errors as failures, I positioned them as potential design opportunities. This challenges digital perfectionism and highlights the unique charm of technological flaws.</li>
+           <li><strong>Visual-Audio Synergy:</strong><br>
+              Glitch art in this project is not only visual but also auditory. As users adjust the sliders, both images and background sounds shift simultaneously—deepening immersion and reinforcing the glitch aesthetic.</li>
+          </ul>
+          <h3>Evolution</h3>
+            <p>The project began with a focus on visual glitch effects but gradually shifted toward championing freedom from perfection and emphasizing artistic experimentation.</p>
+      </div>
+
+      <div class="paragraph" id="framingPara"> <!-- 3) FRAMING -->
+          <h3>Intentional Constraints</h3>
+          <ul class="bullets">
+            <li><strong>Desktop-First Design:</strong><br>
+              Due to development limitations and time constraints, the experience was optimized for desktop use to ensure a more  immersive and technically stable environment.</li>
+            <li><strong>Fullscreen & Layered UI:</strong><br>
+              To maximize user immersion, the interface utilizes a fullscreen layout with layered transitions and overlapping content for dynamic interaction.</li>
+            <li><strong>User Warnings:</strong><br>
+              A visual-auditory warning appears on the loading page to prepare users for potentially intense sensory experiences.</li>
+            <li><strong>Narrative Entry Point:</strong><br>
+              Rather than a standard loading animation, the project begins with a VHS-style intro featuring typewriter sounds and screen flickers—inviting users into a digital art world with a storytelling approach.</li>
+              </ul>
+            <h3>Evolution</h3>
+              <p>For loading page, I considered a simple percentage-based loading animation. This changed once I realized the importance of conveying the glitch aesthetic and narrative tone from the very beginning, leading to the addition of a stylized VHS intro.
+              </p>
+      </div>
+
+      <div class="paragraph" id="appearancePara"> <!-- 4) APPEARANCE -->
+        <h3>Stylistic Choices and Aesthetic Intentions:</h3>
+          <ul class="bullets">
+            <li><strong>VHS Inspired Visuals:</strong><br>
+                VHS video, background, color bleed effects, and noise textures were used to evoke the analog beauty of visual distortion. The loading sequence simulates a tape insertion, drawing users into the glitch universe. and I intentionally darkened the edges of the main page to guide the user's attention toward the center workspace. This helps create a focused visual area, encouraging users to concentrate on where the actual interaction happens.</li>
+            <li><strong>Typography:</strong><br>
+                'Jacquard 12' was used for titles to convey a broken, analog vibe, while 'JetBrains Mono' offered clean readability for UI elements. A typing animation added a sense of unease and glitchiness.</li>
+            <li><strong>Color Palette:</strong><br>
+                Dominated by black, red, and white, the color scheme creates strong contrast and cyberpunk energy, inspired by retro television glitches. Text selection adds mint and purple hues for a more digital and futuristic vibe.</li>
+            <li><strong>UI Design:</strong><br>
+                The sliders looks like audio an audio mixer, it was for glitch effects were designed with minimal decoration to keep the user's attention focused on the editing process.  In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.</li>
+            <li><strong>Audio Design:</strong><br>
+                The retro, beat-driven cyber music makes users to keep listening and stay on the site longer. While the visual design is kept minimal, the addictive melodies and rhythmic beats heighten the overall auditory stimulation.</li>
+            </ul>
+        <h3>Evolution</h3>
+          <p>My previous design leaned heavily into neon-heavy cyberpunk visuals. However, feedback revealed that complex fonts, overly vibrant colors, and loud audio made the interface difficult to read and use. I shifted toward a subtler, analog-inspired aesthetic that reflects the origins of glitch art. UI elements were simplified for clarity, and audio was adjusted to better complement the visuals.</p>
+      </div>
+
+      <div class="paragraph" id="qualityPara"> <!-- 5) QUALITY -->
+        <h3>Technical Implementation Choices:</h3>
+            <ul class="bullets">
+              <li><strong>Separate HTML Files:</strong><br>
+                  The loading and main pages were split into separate HTML files to reduce performance load. Returning users can access the editor directly, skipping the intro.
+              </li>
+              <li><strong>Loading Page (Vanilla.js):</strong><br>
+                  The intro animations and alerts were created with pure JavaScript for performance and simplicity. Audio was handled using the built-in Audio() object for smooth playback.
+              </li>
+              <li><strong>Main Page (Konva.js):</strong><br>
+                  I used Konva.js for its non-destructive canvas capabilities, the app converts it into pixel data and allows effects to overlay on layers seamlessly without altering the original image. This enabled real-time glitch experimentation using direct pixel manipulation.
+              </li>
+              <li><strong>Audio (Tone.js)</strong><br>
+                  Tone.js allowed for dynamic soundscapes that respond to user interactions. I divided the music level into 4 stages, stage 1 just being the original track. The more dramatic the glitch effect, the more the audio shifts in intensity and distortion.
+              </li>
+              <li><strong>Additional Convenient Buttons</strong><br>
+                  There are Undo/Redo, Random, Reset, and Import/Export buttons. These enhance usability by providing quick access to common actions. The Undo/Redo system enables users to revert changes easily. The Random button generates a completely new image, encouraging exploration and surprise. The Reset button clears all effects, allowing users to start fresh without reloading the page. The Import/Export buttons enable users to bring in their own images and download their edited creations easily.
+                </li>
+              </li>
+            </ul>
+          <h3>Evolution</h3>
+            <p>The project originally focused on basic image display and effects. Discovering Konva.js enabled more advanced layer-based glitching. Similarly, audio evolved from simple background music to interactive soundscapes using Tone.js.</p>
+      </div>
+
+      <div class="paragraph" id="compositionPara"> <!-- 6) COMPOSITION -->
+        <h3>Overall Cohesion:</h3>
+          <ul class="bullets">
+            <li><strong>Split Layout:</strong><br>
+                The interface separates the editing panel and output canvas side-by-side, providing users with instant visual feedback. I considered whether to place the control panel on the left or right side, and ultimately decided on the right. This choice was based on the common tendency for users to focus more on the right side of the screen, making it a more intuitive location for interaction.
+            </li>
+            <li><strong>Intuitive Sliders:</strong><br>
+                Each slider was visually distinct and easy to manipulate, helping users understand their functionality at a glance. The slider adjusts the pitch conveniently in 10 steps.
+            </li>
+            <li><strong>Effect Grouping and Order:</strong><br>
+                Effects were organized thoughtfully, considering their interactions to create a meaningful editing flow. For example, the 'Glitch' effect is applied first, followed by 'Noise' and 'Color Shift', allowing users to build complexity gradually.
+            </li>
+            <li><strong>Grouped Utility Buttons:</strong><br>
+                Key actions like reset, save, and undo were grouped to enhance usability. In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.
+            </li>
+            <li><strong>Image Export:</strong><br>
+                Users can easily download their edited images via the canvas.toDataURL() function, user can download the glitched image with a "_glitched" tag in the filename for easy identification.</li>
+            </li>
+          </ul>
+        <h3>Evolution</h3>
+          <p>I considered a more detailed control ranging from 1 to 100, but based on feedback that it was excessive and unnecessary, I simplified it to a smaller range. Early UI prototypes felt cluttered and confusing, so I reorganized elements for clearer navigation and smoother interaction.</p>
+      </div>
+
+      <div class="paragraph" id="navigationPara"> <!-- 7) NAVIGATION -->
+        <h3>Interaction Priorities:</h3>
+          <ul class="bullets">
+            <li><strong>Immersive Progression:</strong><br>
+                From desktop instructions → loading → warning → transition → editor, the journey was designed to gradually pull users deeper into the experience using a blend of visual and auditory cues. A 'welcome' animation eases the transition into the main page, it smoothly guide users gently into the interface.
+            </li>
+            <li><strong>Non-linear Interaction:</strong><br>
+                Users can apply effects in any order, encouraging creative experimentation and unexpected results. The interface supports this by allowing users to adjust multiple sliders simultaneously, creating a dynamic editing environment.
+            </li>
+            <li><strong>Immediate Feedback:</strong><br>
+                Adjusting a slider results in instant visual and audio changes, encouraging hands-on exploration. This real-time feedback loop is crucial for engaging users and allowing them to see the impact of their adjustments immediately.
+            </li>
+            <li><strong>Limited Undo and Redo:</strong><br>
+                Redo and undo system stores up to 10 states. Undo was intentionally restricted to a single step—not just for technical reasons, but to promote creative risk-taking over perfection. 
+            </li>
+             <li><strong>Sudden change and Tension</strong><br>
+                The initial red warning screen immediately grabs attention, setting an intense and slightly unsettling tone from the very beginning. Furthermore, random button, which generates entirely unpredictable images. Simultaneously, the audio may suddenly distort or intensify, potentially causing a subtle sense of discomfort for the user.
+            </li>
+          </ul>
+        <h3>Evolution</h3>
+          <p>The initial plan was to display all functions at once. However, to enhance user immersion, I adopted a staged approach where each interaction builds anticipation and deepens engagement.The layered structure starting from the loading screen immerses the user, making them feel as if they are trapped in a single space, encouraging exploration. </p>
+    </div>
+  </div>
+</body>
+</html>
