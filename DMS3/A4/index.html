@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Design Judgments & Critical Analysis</title>
-  <link rel="icon" href="favicon.png"> <!-- img from FlatIcon-->
+  <link rel="icon" href="./files/favicon.png"> <!-- img from FlatIcon-->
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
@@ -32,8 +32,14 @@
 
     <div class="container">
       <div class="paragraph" id="introPara"> <!-- INTRODUCTION -->
-        <p>This page critically reflects on the key design decisions made during the development of the 'Glitch n Switch' project. It explores the project’s intent, value, aesthetics, technical limitations, and compositional strategies. Through these considerations and decisions, 'Glitch n Switch' became more than just an image editing tool—it became a space to discover new beauty in imperfection and enjoy the freedom of creative experimentation. I invite you to experience and enjoy the full potential of this platform :D</p>
-        <a href="https://bunohey.github.io/DMS3/A2/loading/loading.html" target="_blank" id="open">➥ Open 'Glitch n Switch' in new tab</a>
+        <div class="videoSide">
+            <video src="./files/medusa.mp4" loop muted autoplay style="height: 25vh; width: auto;"></video>
+        </div>
+        <div class="textSide">
+            <p style="width: auto; height: auto; display: flex; margin-top: 0; margin-right: 0";>This page critically reflects on the key design decisions made during the development of the 'Glitch n Switch' project. It explores the project’s intent, value, aesthetics, technical limitations, and compositional strategies. Through these considerations and decisions, 'Glitch n Switch' became more than just an image editing tool—it became a space to discover new beauty in imperfection and enjoy the freedom of creative experimentation. I invite you to experience and enjoy the full potential of this platform :D</p>
+            <p class="credit">
+              by Hayoung Ahn</p>
+        </div>
       </div>
 
       <div class="paragraph" id="purposePara"> <!-- 1) PURPOSE -->
@@ -65,13 +71,17 @@
           <ul class="bullets">
             <li><strong>Desktop-First Design:</strong><br>
               Due to development limitations and time constraints, the experience was optimized for desktop use to ensure a more  immersive and technically stable environment.</li>
-            <li><strong>Fullscreen & Layered UI:</strong><br>
-              To maximize user immersion, the interface utilizes a fullscreen layout with layered transitions and overlapping content for dynamic interaction.</li>
+              <video src="./files/hover1.mp4" loop muted autoplay></video>
             <li><strong>User Warnings:</strong><br>
               A visual-auditory warning appears on the loading page to prepare users for potentially intense sensory experiences.</li>
+              <video src="./files/hover2.mp4" loop muted autoplay></video>
             <li><strong>Narrative Entry Point:</strong><br>
               Rather than a standard loading animation, the project begins with a VHS-style intro featuring typewriter sounds and screen flickers—inviting users into a digital art world with a storytelling approach.</li>
-              </ul>
+              <video src="./files/hover3.mp4" loop muted autoplay></video>
+            <li><strong>Fullscreen & Layered UI:</strong><br>
+              To maximize user immersion, the interface utilizes a fullscreen layout with layered transitions and overlapping content for dynamic interaction.</li>
+            <video src="./files/hover4.mp4" loop muted autoplay></video>
+          </ul>
             <h3>Evolution</h3>
               <p>For loading page, I considered a simple percentage-based loading animation. This changed once I realized the importance of conveying the glitch aesthetic and narrative tone from the very beginning, leading to the addition of a stylized VHS intro.</p>
       </div>
@@ -81,8 +91,8 @@
           <ul class="bullets">
             <li><strong>VHS Inspired Visuals:</strong><br>
                 VHS video, background, color bleed effects, and noise textures were used to evoke the analog beauty of visual distortion. The loading sequence simulates a tape insertion, drawing users into the glitch universe. and I intentionally darkened the edges of the main page to guide the user's attention toward the center workspace. This helps create a focused visual area, encouraging users to concentrate on where the actual interaction happens.</li>
-                  <video src="./files/VHS.mp4" loop muted autoplay></video>
-                  <video src="./files/VHS2.mp4" loop muted autoplay></video>
+                  <video src="./files/VHS.mp4" loop muted autoplay style="width: 22vw; height: auto;"></video>
+                   <video src="./files/VHS2.mp4" loop muted autoplay style="width: 22vw; height: auto;"></video>
             <li><strong>Typography:</strong><br>
                 'Rubik Iso' and 'Jacquard 12' was used for titles to convey a broken, analog pixel vibe, while 'JetBrains Mono' offered clean readability for UI elements. A typing animation added a sense of unease and glitchiness.</li>
                   <img src="./files/jacquard12.png">
@@ -92,14 +102,19 @@
                 Dominated by black, red, and white, the color scheme creates strong contrast and cyberpunk energy, inspired by retro television glitches. Text selection adds mint and purple hues for a more digital and futuristic vibe.</li>
                   <img src="./files/colorPalette.png">
             <li><strong>UI Design:</strong><br>
-                The sliders looks like audio an audio mixer, it was for glitch effects were designed with minimal decoration to keep the user's attention focused on the editing process.  In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.
-            </li>
+                The sliders looks like audio an audio mixer, it was for glitch effects were designed with minimal decoration to keep the user's attention focused on the editing process.  In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.</li>
+                  <img src="./files/controlPanel.png">
+                  <img src="./files/popup.png" style="width: 22vw; height: auto;">
             <li><strong>Audio Design:</strong><br>
                 The retro, beat-driven cyber music makes users to keep listening and stay on the site longer. While the visual design is kept minimal, the addictive melodies and rhythmic beats heighten the overall auditory stimulation.</li>
-                <audio controls src="./files/backgroundmusic.mp3"></audio>
-                <audio controls src="./files/bell.wav"></audio>
-                <audio controls src="./files/casio_glitch.wav"></audio>
-                </ul>
+                <audio id="bgMusic" src="./files/backgroundmusic.mp3"></audio>
+                <audio id="bellSound" src="./files/bell.wav"></audio>
+                <audio id="glitchSound" src="./files/casio_glitch.wav"></audio>
+
+                <button id="bgBtn" data-original-text="Background Music ♫">Background Music ♫</button>
+                <button id="bellBtn" data-original-text="Intro Bell Sound ♫">Intro Bell Sound ♫</button>
+                <button id="glitchBtn" data-original-text="Casio Glitch Transition Sound ♫">Casio Glitch Transition Sound ♫</button>
+          </ul>
         <h3>Evolution</h3>
           <p>My previous design leaned heavily into neon-heavy cyberpunk visuals. However, feedback revealed that complex fonts, overly vibrant colors, and loud audio made the interface difficult to read and use. I shifted toward a subtler, analog-inspired aesthetic that reflects the origins of glitch art. UI elements were simplified for clarity, and audio was adjusted to better complement the visuals.</p>
       </div>

@@ -13,7 +13,7 @@ img {
 }
 
 video {
-  width: 24vw;
+  width: 30vw;
   height: auto;
   margin-bottom: 3rem;
   margin-right: 2rem;
@@ -22,6 +22,32 @@ video {
   box-shadow: 6px 6px 0px rgb(17, 17, 17);
   pointer-events: none;
 }
+
+button {
+      background-color: black;
+      font-family: "Arial";
+      color: rgb(248, 248, 248);
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 5px;
+      box-shadow: 3px 3px 0 black;
+      padding: 10px 30px;
+      height: 5vh;
+      transition: 0.3s;
+      margin-right: 2.5rem;
+  }
+
+  button:hover {
+      background-color: rgb(255, 255, 255);
+      color: black;
+      cursor: url(./files/cursor.png), auto;
+  }
+
+  button[type="button"] {
+    min-width: 22vw;
+    text-align: center;
+    white-space: nowrap;
+    padding: 10px 30px;
+  }
 
 .bullets {
   list-style-type: disc;
@@ -116,27 +142,58 @@ h3 {
 }
 
 #introPara {
-  display: block;
-  margin-top: 8rem;
-  margin-bottom: 8rem;
+  margin-top: 0rem;
+  margin-bottom: 4rem;
   margin-left: 7rem;
   margin-right: 7rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-#open {
-  color: rgb(0, 0, 0);
-  font-family: "Oranienbaum", serif;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 1.5rem;
-  text-decoration-skip-ink: auto;
-}
-    #open:hover {
-      color: rgb(255, 255, 255);
-      transition: 0.5s;
-      text-shadow: 2px 2px 0 #030303;
-      cursor: url('cursor.png'), auto;
+  .videoSide video {
+    height: 40vw;
+    object-fit: cover;
+  }
+
+  .textSide {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+    .textSide p {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+    .credit {
+    margin-top: auto;
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+    #open {
+      color: rgb(0, 0, 0);
+      font-family: "Oranienbaum", serif;
+      font-weight: 800;
+      font-style: italic;
+      font-size: 1.5rem;
+      line-height: 0;
+      z-index: 999;
+      text-decoration-skip-ink: auto;
     }
+        #open:hover {
+          color: rgb(255, 255, 255);
+          transition: 0.5s;
+          text-shadow: 2px 2px 0 #030303;
+          cursor: url(./files/cursor.png), auto;
+        }
 
 /* #endregion */
 
@@ -150,7 +207,7 @@ body {
   flex-direction: row;
   gap: 2.5rem;
   background-color: rgb(218, 212, 204);
-  cursor: url('hover.png'), auto;
+  cursor: url(./files/hover.png), auto;
 }
 
   ::selection {
@@ -205,7 +262,6 @@ body {
 
 /* #region Toggle */
 .categoryToggle {
-cursor: pointer;
 background-color: transparent;
 padding: 6px 15px;
 transition: background-color 1s ease;
@@ -220,7 +276,7 @@ width: 22vw;
     color: rgb(255, 255, 255);
     text-shadow: 2px 2px 0 #030303;
     transition: 0.5s;
-    cursor: url('cursor.png'), auto;
+    cursor: url(./files/cursor.png), auto;
   }
 
   .categoryToggle::after {
@@ -238,6 +294,7 @@ width: 22vw;
 
 .paragraph {
   max-height: 0.2rem;
+  padding-top: 6vh;
   opacity: 0;
   transition: opacity 0.6s ease;
   display: none;
