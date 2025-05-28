@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const wriggleEl = document.querySelector('small');
   const text = wriggleEl.textContent;
   wriggleEl.innerHTML = '';
+  const openLink = document.getElementById('open'); // Reference to the link
 
   // Wriggle effect //
   [...text].forEach((char) => {
@@ -26,7 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
   paragraphs.forEach(p => p.classList.remove("expanded"));
   toggles.forEach(t => t.classList.remove("active"));
   const defaultPara = document.getElementById(defaultParaId);
-  if (defaultPara) defaultPara.classList.add("expanded");
+  if (defaultPara) {
+    defaultPara.classList.add("expanded");
+    openLink.style.display = 'inline'; // Show link initially
+  }
 
   toggles.forEach(toggle => {
     toggle.addEventListener("click", () => {
@@ -39,7 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         paragraphs.forEach(p => p.classList.remove("expanded"));
         toggles.forEach(t => t.classList.remove("active"));
 
-        if (defaultPara) defaultPara.classList.add("expanded");
+        if (defaultPara) {
+          defaultPara.classList.add("expanded");
+          openLink.style.display = 'inline'; // Show link when returning to intro
+        }
 
         // Reset the active toggle //
         const defaultToggleId = defaultParaId.replace("Para", "Toggle");
@@ -47,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (defaultToggle) defaultToggle.classList.add("active");
 
         defaultPara.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
         return;
       }
 
@@ -57,6 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
       targetPara.classList.add("expanded");
       toggle.classList.add("active");
       targetPara.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
+
+      // Show/hide link based on target paragraph
+      if (targetPara.id === 'introPara') {
+        openLink.style.display = 'inline';
+      } else {
+        openLink.style.display = 'none';
+      }
     });
   });
 });

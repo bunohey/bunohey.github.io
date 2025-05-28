@@ -22,6 +22,7 @@
     <h2 class="categoryToggle" id="qualityToggle">Quality</h2>
     <h2 class="categoryToggle" id="compositionToggle">Composition</h2>
     <h2 class="categoryToggle" id="navigationToggle">Navigation</h2>
+    <h2 class="categoryToggle" id="epilogueToggle">Epilogue</h2>
   </div>
 
   <div class="layoutRight">
@@ -72,8 +73,7 @@
               Rather than a standard loading animation, the project begins with a VHS-style intro featuring typewriter sounds and screen flickers—inviting users into a digital art world with a storytelling approach.</li>
               </ul>
             <h3>Evolution</h3>
-              <p>For loading page, I considered a simple percentage-based loading animation. This changed once I realized the importance of conveying the glitch aesthetic and narrative tone from the very beginning, leading to the addition of a stylized VHS intro.
-              </p>
+              <p>For loading page, I considered a simple percentage-based loading animation. This changed once I realized the importance of conveying the glitch aesthetic and narrative tone from the very beginning, leading to the addition of a stylized VHS intro.</p>
       </div>
 
       <div class="paragraph" id="appearancePara"> <!-- 4) APPEARANCE -->
@@ -81,15 +81,25 @@
           <ul class="bullets">
             <li><strong>VHS Inspired Visuals:</strong><br>
                 VHS video, background, color bleed effects, and noise textures were used to evoke the analog beauty of visual distortion. The loading sequence simulates a tape insertion, drawing users into the glitch universe. and I intentionally darkened the edges of the main page to guide the user's attention toward the center workspace. This helps create a focused visual area, encouraging users to concentrate on where the actual interaction happens.</li>
+                  <video src="./files/VHS.mp4" loop muted autoplay></video>
+                  <video src="./files/VHS2.mp4" loop muted autoplay></video>
             <li><strong>Typography:</strong><br>
-                'Jacquard 12' was used for titles to convey a broken, analog vibe, while 'JetBrains Mono' offered clean readability for UI elements. A typing animation added a sense of unease and glitchiness.</li>
+                'Rubik Iso' and 'Jacquard 12' was used for titles to convey a broken, analog pixel vibe, while 'JetBrains Mono' offered clean readability for UI elements. A typing animation added a sense of unease and glitchiness.</li>
+                  <img src="./files/jacquard12.png">
+                  <img src="./files/rubikIso.png">
+                  <img src="./files/jetBrainsMono.png">
             <li><strong>Color Palette:</strong><br>
                 Dominated by black, red, and white, the color scheme creates strong contrast and cyberpunk energy, inspired by retro television glitches. Text selection adds mint and purple hues for a more digital and futuristic vibe.</li>
+                  <img src="./files/colorPalette.png">
             <li><strong>UI Design:</strong><br>
-                The sliders looks like audio an audio mixer, it was for glitch effects were designed with minimal decoration to keep the user's attention focused on the editing process.  In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.</li>
+                The sliders looks like audio an audio mixer, it was for glitch effects were designed with minimal decoration to keep the user's attention focused on the editing process.  In also, I added a glowing effect to all the buttons when hovered over to make them easier to identify.
+            </li>
             <li><strong>Audio Design:</strong><br>
                 The retro, beat-driven cyber music makes users to keep listening and stay on the site longer. While the visual design is kept minimal, the addictive melodies and rhythmic beats heighten the overall auditory stimulation.</li>
-            </ul>
+                <audio controls src="./files/backgroundmusic.mp3"></audio>
+                <audio controls src="./files/bell.wav"></audio>
+                <audio controls src="./files/casio_glitch.wav"></audio>
+                </ul>
         <h3>Evolution</h3>
           <p>My previous design leaned heavily into neon-heavy cyberpunk visuals. However, feedback revealed that complex fonts, overly vibrant colors, and loud audio made the interface difficult to read and use. I shifted toward a subtler, analog-inspired aesthetic that reflects the origins of glitch art. UI elements were simplified for clarity, and audio was adjusted to better complement the visuals.</p>
       </div>
@@ -163,6 +173,34 @@
         <h3>Evolution</h3>
           <p>The initial plan was to display all functions at once. However, to enhance user immersion, I adopted a staged approach where each interaction builds anticipation and deepens engagement. The layered structure starting from the loading screen immerses the user, making them feel as if they are trapped in a single space, encouraging exploration. </p>
     </div>
+
+    <div class="paragraph" id="epiloguePara"> <!-- 8) Epilogue -->
+      <h3>Challenges and Limitations</h3>
+         <p>One of the biggest challenges I faced was writing the scripts, simply because I didn’t have much experience with coding in general. This made it hard to articulate my ideas clearly, especially when working with AI tools like ChatGPT.</p>
+        <ul class="bullets">
+          <li><strong>Vague Instructions</strong><br>
+            To be honest, using AI was essential throughout the project. However, to generate effective results, I needed to provide it with very specific, technically detailed instructions. In practice, I often gave prompts that were either too abstract or assumed too much prior knowledge. For instance, I once wrote something like, “Apply an effect according to the value of a slider with the ID ‘X’, which ranges from 1 to 10,” but failed to include crucial implementation details. As a result, the AI had to fill in too many gaps on its own, which led to frequent misinterpretations or incomplete outcomes, such as:
+            <ul class="examples">
+              <li>What exactly does the value represent? Should the intensity be scaled proportionally from 1 to 10?<br>Or should the intensity be applied as a fixed value between 1 and 10?</li>
+              <li>Should the effect be cumulative or reset each time? Should it update on input or change events?</li>
+              <li>What happens when multiple effects are layered?</li>
+              <li>Does that mean a moderate value adds a moderate amount of effect, and a maximum value adds a much stronger effect? Then, if I move from a moderate to a maximum setting, does the effect combine both levels to become even more intense? Like, when I reduce the slider from 10 to 5, does that mean the effect decreases by 5, or do I now apply a total of 5?<br>(***I hadn’t realized the logic might be stacking the effect progressively as the value increases)</li>
+            </ul>
+            Because I hadn’t explained these things clearly, the results I got back were often very different from what I expected. This really made me realize the importance of clear communication, especially when working with generative tools.
+          <li><strong>Auto-Resizing Canvas</strong><br>
+            When a user uploads an image, the image should appear as large as possible in the blank space to the left of the control panel—while keeping its original aspect ratio. I struggled to get Konva’s canvas to automatically resize according to the image's proportions, while also scaling it up to the maximum possible size. This part took a lot of trial and error.
+          </li>
+          <li><strong>Delayed Effects</strong><br>
+            Even after solving the canvas size issue, I ran into another frustrating problem: many actions in the control panel (like moving a slider, uploading an image, clicking reset or random) reacted one step too late. For example, after uploading an image, the image itself would appear on the canvas correctly, but the canvas would not resize to match its aspect ratio until I clicked another button. Similarly, if I set an effect’s value to 10 and then lowered it back to 0, the effect didn’t disappear immediately—I had to click somewhere else before the visual update actually applied. This made the interaction feel unintuitive and buggy.
+          </li>
+        </ul>
+      <h3>How I Resolved It</h3>
+        <p>Honestly, I think the root of these issues was my lack of understanding of coding fundamentals. So I spent a lot of time self-studying to better grasp what I was doing. I also asked my professor and friends for help (thank you so much!!). And of course, ChatGPT was an essential part of the process. I’ll admit, I felt a bit uncomfortable that this project wasn’t entirely “mine” in the traditional sense, I didn’t build it alone. I even questioned whether relying this much on AI was okay. But in the end, I’m proud that I finished it, even if it’s not perfect. I didn’t just copy and paste the answers, I tried to understand the reasoning behind the solutions. I asked ChatGPT to explain not just how something works but why it works that way, and I also made sure the code was written in a straightforward and beginner-friendly style, even if it might look a bit clunky or inefficient to advanced developers.</p>
+    </div>
   </div>
+
+
 </body>
+
+
 </html>
