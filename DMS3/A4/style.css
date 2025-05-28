@@ -142,8 +142,8 @@ h3 {
 }
 
 #introPara {
-  margin-top: 0rem;
-  margin-bottom: 4rem;
+  margin-top: 2.4rem;
+  margin-bottom: 2.4rem;
   margin-left: 7rem;
   margin-right: 7rem;
   display: flex;
@@ -172,9 +172,9 @@ h3 {
   }
 
     .credit {
-    margin-top: auto;
+    padding-bottom: 1rem;
+    padding-top: 0.4rem;
     text-align: right;
-    font-style: italic;
     font-weight: bold;
   }
 
@@ -184,8 +184,7 @@ h3 {
       font-weight: 800;
       font-style: italic;
       font-size: 1.5rem;
-      line-height: 0;
-      z-index: 999;
+      text-align: center;
       text-decoration-skip-ink: auto;
     }
         #open:hover {
